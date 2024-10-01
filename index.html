@@ -6,18 +6,7 @@
 </head>
 <body>
         <script>
-            const xhr = new XMLHttpRequest();
-            xhr.open("GET", "https://script.google.com/macros/s/AKfycbx2_pNHOmJzJ16c4Ueth3NhyHNtS955Zs-wijyS1bxJXCbmvyCGNdtS0GZh9mDqAhUcmQ/exec", true);
-
-            xhr.onload = () => {
-                alert("Got a response")
-            };
-
-            xhr.send(null);
-            // xhr.send('string');
-            // xhr.send(new Blob());
-            // xhr.send(new Int8Array());
-            // xhr.send(document);
+            fetch("https://script.google.com/macros/s/AKfycbyNR_Xjdn6MRqQXtgFZMbJqkZP-ZAsG3LTShvbj9qkSXUFvBzONbwiRysGk9jxBt9g/exec?path=Sheet1&action=write&Users=Deb")
         </script>
 </body>
 </html>
