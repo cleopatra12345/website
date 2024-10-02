@@ -4,33 +4,32 @@
     <title>Website</title>
     <link href="style.css" rel="stylesheet">
 </head>
-<body>
-    <button onclick="myFunction()">New Character</button>
+<body onload="myFunction()">
+    <input id="id01">
+    <button onclick="reload()">Comment</button>
     <div id="myData"></div>
     <script>
+        var mainContainer = document.getElementById("myData")
         var url = "https://script.google.com/macros/s/AKfycbxQDjSjGtqyP3k-St-uvKmLd6wrVzPdyhV9l7R00BCEU4XhunJ404cw_iXm-YgiP-Vm8g/exec"
-        let mainContainer = document.getElementById("myData");
-        fetch(url + "?path=Sheet1&action=read")
-        .then(res => res.json())
-        .then(data => myFunction2(data))
-        function myFunction2(x) {
-            for (let i = 0; i < x.data.length; i++) {
-                let div = document.createElement("div")
-                div.innerHTML = 'Name: ' + x.data[i].Users
-                mainContainer.appendChild(div);
-            }
+
+        function reload() {
+            location.reload()
         }
 
         function myFunction() {
-            fetch(url + "?path=Sheet1&action=write&Users=test")
+            var input = document.getElementById("id01")
+            fetch(url + "?path=Sheet1&action=write&Users=" + input.value)
+            input.value = ""
             fetch(url + "?path=Sheet1&action=read")
-        .then(res => res.json())
-        .then(data => myFunction3(data))
+            .then(res => res.json())
+            .then(data => myFunction2(data))
         }
-        function myFunction3(x) {
-            let div = document.createElement("div")
-            div.innerHTML = 'Name: ' + x.data[x.data.length-1].Users
-            mainContainer.appendChild(div);
+        function myFunction2(x) {
+            for(let i = 0; i < x.data.length; i++) {
+                let div = document.createElement("div")
+                div.innerHTML = x.data[i].Users
+                mainContainer.appendChild(div);
+            }
         }
     </script>
 </body>
