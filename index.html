@@ -13,12 +13,12 @@
         var url = "https://script.google.com/macros/s/AKfycbxQDjSjGtqyP3k-St-uvKmLd6wrVzPdyhV9l7R00BCEU4XhunJ404cw_iXm-YgiP-Vm8g/exec"
 
         function reload() {
-            location.reload()
+            //location.reload()
         }
 
         function myFunction() {
             var input = document.getElementById("id01")
-            fetch(url + "?path=Sheet1&action=write&Users=" + input.value)
+            fetch(url + "?path=Sheet1&action=write&Users=sammm"/* + input.value*/)
             input.value = ""
             fetch(url + "?path=Sheet1&action=read")
             .then(res => res.json())
