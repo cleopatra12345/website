@@ -20,7 +20,7 @@
             var input = document.getElementById("id01")
             console.log(input.value)
             fetch(url + "?path=Sheet1&action=write&Users=" + input.value)
-            input.value = ""
+            //input.value = ""
             fetch(url + "?path=Sheet1&action=read")
             .then(res => res.json())
             .then(data => myFunction2(data))
