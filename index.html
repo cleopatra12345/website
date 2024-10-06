@@ -11,16 +11,20 @@
     <script>
         var mainContainer = document.getElementById("myData")
         var url = "https://script.google.com/macros/s/AKfycbxQDjSjGtqyP3k-St-uvKmLd6wrVzPdyhV9l7R00BCEU4XhunJ404cw_iXm-YgiP-Vm8g/exec"
+        var isChrome = !!window.chrome;
 
         function reload() {
-            location.reload()
+            if(isChrome) {
+                myFunction1()
+            } else {
+                location.reload()
+            }
         }
-
         function myFunction() {
             var input = document.getElementById("id01")
             console.log(input.value)
             fetch(url + "?path=Sheet1&action=write&Users=" + input.value)
-            //input.value = ""
+            input.value = ""
             fetch(url + "?path=Sheet1&action=read")
             .then(res => res.json())
             .then(data => myFunction2(data))
@@ -31,6 +35,20 @@
                 div.innerHTML = x.data[i].Users
                 mainContainer.appendChild(div);
             }
+        }
+        function myFunction1() {
+            var input = document.getElementById("id01")
+            console.log(input.value)
+            fetch(url + "?path=Sheet1&action=write&Users=" + input.value)
+            input.value = ""
+            fetch(url + "?path=Sheet1&action=read")
+            .then(res => res.json())
+            .then(data => myFunction3(data))
+        }
+        function myFunction3(x) {
+            let div = document.createElement("div")
+            div.innerHTML = x.data[x.data.length - 1].Users
+            mainContainer.appendChild(div);
         }
     </script>
 </body>
