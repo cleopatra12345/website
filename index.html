@@ -6,20 +6,24 @@
 </head>
 <body onload="myFunction()">
     <input id="id01">
-    <button onclick="reload()">Comment</button>
+    <button onclick="comment()">Comment</button>
+    <button onclick="refresh()">Refresh</button>
     <div id="myData"></div>
     <script>
         var mainContainer = document.getElementById("myData")
         var url = "https://script.google.com/macros/s/AKfycbxQDjSjGtqyP3k-St-uvKmLd6wrVzPdyhV9l7R00BCEU4XhunJ404cw_iXm-YgiP-Vm8g/exec"
         var isChrome = !!window.chrome;
 
-        function reload() {
+        function comment() {
             if(isChrome) {
                 myFunction1()
                 location.reload()
             } else {
                 location.reload()
             }
+        }
+        function refresh() {
+            location.reload()
         }
         function myFunction() {
             var input = document.getElementById("id01")
