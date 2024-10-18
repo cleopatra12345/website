@@ -4,7 +4,7 @@
     <title>Website</title>
     <link href="style.css" rel="stylesheet">
 </head>
-<body onload="myFunction()">
+<body onload="onLoad()">
     <input id="id01">
     <button onclick="comment()">Comment</button>
     <button onclick="refresh()">Refresh</button>
@@ -12,7 +12,6 @@
     <script>
         var mainContainer = document.getElementById("myData")
         var url = "https://script.google.com/macros/s/AKfycbxQDjSjGtqyP3k-St-uvKmLd6wrVzPdyhV9l7R00BCEU4XhunJ404cw_iXm-YgiP-Vm8g/exec"
-        var isChrome = !!window.chrome;
 
         function comment() {
             if(isChrome) {
@@ -25,9 +24,8 @@
         function refresh() {
             location.reload()
         }
-        function myFunction() {
+        function onLoad() {
             var input = document.getElementById("id01")
-            console.log(input.value)
             fetch(url + "?path=Sheet1&action=write&Users=" + input.value)
             input.value = ""
             fetch(url + "?path=Sheet1&action=read")
@@ -43,7 +41,6 @@
         }
         function myFunction1() {
             var input = document.getElementById("id01")
-            console.log(input.value)
             fetch(url + "?path=Sheet1&action=write&Users=" + input.value)
             input.value = ""
             fetch(url + "?path=Sheet1&action=read")
