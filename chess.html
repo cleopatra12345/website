@@ -1,5 +1,5 @@
 <div>
-    <button id="a8" onclick="button()">b1</button>
+    <button id="a8" onclick="button("a8")">b1</button>
     <button id="b8">b2</button>
     <button id="c8">b3</button>
     <button id="d8">b3</button>
@@ -79,7 +79,7 @@
     <button id="h1">b3</button>
 </div>
 <script>
-    function button() {
-        document.getElementById("a8").innerHTML = "oo"
+    function button(x) {
+        document.getElementById(x).innerHTML = "oo"
     }
 </script>
