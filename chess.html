@@ -79,7 +79,17 @@
     <button id="h1">b3</button>
 </div>
 <script>
+    var counter = 0
+    var element1
+    var element2
     function button(x) {
-        document.getElementById(x).innerHTML = x
+        if(counter == 0) {
+            element1 = document.getElementById(x).innerHTML
+            counter++
+        {
+        else if(counter == 1)
+        {
+            document.getElementById(x).innerHTML = element1
+        }
     }
 </script>
