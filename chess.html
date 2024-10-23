@@ -81,14 +81,15 @@
 
 <script>
     var counter = 0
+    var element
     function button(x) {
         if(counter == 0) {
-        document.getElementById(x).innerHTML = counter
+        element = document.getElementById(x).innerHTML
         counter++
         return
     }
         if(counter == 1) {
-        document.getElementById(x).innerHTML = counter
+        document.getElementById(x).innerHTML = element
     }
     }
 </script>
