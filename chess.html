@@ -88,6 +88,7 @@
     function button(x) {
         if(counter == 0) {
         element1 = document.getElementById(x)
+        element1.style.background = "#00110011"
         elementText1 = element1.innerHTML
         counter++
         return
@@ -97,6 +98,7 @@
         elementText2 = element2.innerHTML
         element1.innerHTML = elementText2
         element2.innerHTML = elementText1
+        element1.style.background = "#000000"
         counter = 0
     }
     }
