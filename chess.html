@@ -82,26 +82,22 @@
 <script>
     var counter = 0
     var elementText1
-    var elementText2
     var element1
-    var element2
     var background1
     function button(x) {
         if(counter == 0) {
-        element1 = document.getElementById(x)
-        background1 = element1.style.background
-        element1.style.background = "#00110011"
-        elementText1 = element1.innerHTML
-        counter++
-        return
-    }
+            element1 = document.getElementById(x)
+            background1 = element1.style.background
+            element1.style.background = "#00110011"
+            elementText1 = element1.innerHTML
+            counter++
+            return
+        }
         if(counter == 1) {
-        element2 = document.getElementById(x)
-        elementText2 = element2.innerHTML
-        element1.innerHTML = elementText2
-        element2.innerHTML = elementText1
-        element1.style.background = background1
-        counter = 0
-    }
+            document.getElementById(x).innerHTML = elementText1
+            element1.innerHTML = ""
+            element1.style.background = background1
+            counter = 0
+        }
     }
 </script>
