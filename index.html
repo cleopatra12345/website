@@ -31,7 +31,7 @@
         }
         function onLoad() {
             var input = document.getElementById("id01")
-            fetch(url + "?path=Sheet1&action=update&Users=" + input.value)
+            fetch(url + "?path=Sheet1&action=update&Users=" + input.value + "&number=3")
             input.value = ""
             fetch(url + "?path=Sheet1&action=read")
             .then(res => res.json())
@@ -46,7 +46,7 @@
         }
         function comment2() {
             var input = document.getElementById("id01")
-            fetch(url + "?path=Sheet1&action=update&Users=" + input.value)
+            fetch(url + "?path=Sheet1&action=update&Users=" + input.value + "&number=3")
             input.value = ""
             fetch(url + "?path=Sheet1&action=read")
             .then(res => res.json())
