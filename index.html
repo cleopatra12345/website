@@ -30,9 +30,7 @@
             location.reload()
         }
         function onLoad() {
-            var input = document.getElementById("id01")
-            fetch(url + "?path=Sheet1&action=update&Users=" + input.value)
-            input.value = ""
+            
             fetch(url + "?path=Sheet1&action=read")
             .then(res => res.json())
             .then(data => onLoad2(data))
