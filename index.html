@@ -16,7 +16,7 @@
     <script>
         var mainContainer = document.getElementById("myData")
         var isChrome = !!window.chrome
-        var url = "https://script.google.com/macros/s/AKfycbwTcImtmg0cVCqSWFzZQhQG28oAp-04befHjJtRpbNJWn5tF1SWHdRBtNaEafKmRNcmfQ/exec"
+        var url = "https://script.google.com/macros/s/AKfycbykr2gOmt-uv9OiRWObPMOsWrtecmqaGcppOZwJdddMjI-ESezyIWWDoPTNH7eFVS0yug/exec"
 
         function comment() {
             if(isChrome) {
@@ -30,7 +30,9 @@
             location.reload()
         }
         function onLoad() {
-            
+            var input = document.getElementById("id01")
+            fetch(url + "?path=Sheet1&action=update&Users=" + input.value)
+            input.value = ""
             fetch(url + "?path=Sheet1&action=read")
             .then(res => res.json())
             .then(data => onLoad2(data))
