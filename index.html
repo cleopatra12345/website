@@ -5,9 +5,12 @@
     <link href="style.css" rel="stylesheet">
 </head>
 <body onload="onLoad()">
+<!--if not chrome write, clear input, then read-->
     <input id="id01">
     <button onclick="comment()">Comment</button>
+    <!--if chrome write, then reload-->
     <button onclick="refresh()">Refresh</button>
+    <!--reload-->
     <div id="myData"></div>
     <a href="chess.html">chess<a>
     <script>
@@ -28,7 +31,7 @@
         }
         function onLoad() {
             var input = document.getElementById("id01")
-            fetch(url + "?path=Sheet1&action=write&Users=" + input.value)
+            fetch(url + "?path=Sheet1&action=update&Users=" + input.value)
             input.value = ""
             fetch(url + "?path=Sheet1&action=read")
             .then(res => res.json())
