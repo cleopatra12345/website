@@ -4,23 +4,23 @@
     <title>Website</title>
     <link href="style.css" rel="stylesheet">
 </head>
-<body onload="onLoad()">
+<body onload="onLoad("myInput")">
 <!--if not chrome write, clear input, then read-->
-    <input id="id01">
-    <button onclick="comment()">Comment</button>
+    <input id="myInput">
+    <button onclick="comment("myInput", "myOutput")">Comment</button>
     <!--if chrome write, then reload-->
     <button onclick="refresh()">Refresh</button>
     <!--reload-->
-    <div id="myData"></div>
+    <div id="myOutput"></div>
     <a href="chess.html">chess<a>
     <script>
         var mainContainer = document.getElementById("myData")
         var isChrome = !!window.chrome
         var url = "https://script.google.com/macros/s/AKfycbxz8NdaAxt2Ps5qNdtbN0C-4LEgaCOfdWBc2XCjxoa54MlL1dae5yb03F4vU1X3D0BogQ/exec"
 
-        function comment() {
+        function comment(input, output) {
             if(isChrome) {
-                comment2()
+                comment2(input, output)
                 location.reload()
             } else {
                 location.reload()
@@ -29,8 +29,8 @@
         function refresh() {
             location.reload()
         }
-        function onLoad() {
-            var input = document.getElementById("id01")
+        function onLoad(input) {
+            var input = document.getElementById(input)
             fetch(url + "?path=Sheet1&action=update&Users=" + input.value + "&number=3")
             input.value = ""
             fetch(url + "?path=Sheet1&action=read")
@@ -44,16 +44,16 @@
                 mainContainer.appendChild(div);
             }
         }
-        function comment2() {
-            var input = document.getElementById("id01")
+        function comment2(input, output) {
+            var input = document.getElementById(input)
             fetch(url + "?path=Sheet1&action=update&Users=" + input.value + "&number=3")
             input.value = ""
             fetch(url + "?path=Sheet1&action=read")
             .then(res => res.json())
-            .then(data => comment3(data))
+            .then(data => comment3(data, output))
         }
-        function comment3(x) {
-            let div = document.createElement("div")
+        function comment3(x, output) {
+            let div = document.createElement(output)
             div.innerHTML = x.data[x.data.length - 1].Users
             mainContainer.appendChild(div);
         }
