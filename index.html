@@ -30,7 +30,7 @@
             location.reload()
         }
         function onLoad(input) {
-            var input = document.getElementById(input)
+            var myInput = document.getElementById(input)
             fetch(url + "?path=Sheet1&action=update&Users=" + input.value + "&number=3")
             input.value = ""
             fetch(url + "?path=Sheet1&action=read")
@@ -45,7 +45,7 @@
             }
         }
         function comment2(input, output) {
-            var input = document.getElementById(input)
+            var myInput = document.getElementById(input)
             fetch(url + "?path=Sheet1&action=update&Users=" + input.value + "&number=3")
             input.value = ""
             fetch(url + "?path=Sheet1&action=read")
