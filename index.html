@@ -4,10 +4,10 @@
     <title>Website</title>
     <link href="style.css" rel="stylesheet">
 </head>
-<body onload="onLoad("myInput")">
+<body onload="onLoad('myInput')">
 <!--if not chrome write, clear input, then read-->
     <input id="myInput">
-    <button onclick="comment("myInput", "myOutput")">Comment</button>
+    <button onclick="comment('myInput', 'myOutput')">Comment</button>
     <!--if chrome write, then reload-->
     <button onclick="refresh()">Refresh</button>
     <!--reload-->
