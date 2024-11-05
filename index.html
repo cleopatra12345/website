@@ -30,7 +30,7 @@
             location.reload()
         }
         function onLoad(input) {
-            var myInput = document.getElementById(input)
+            var myInput = document.getElementById("myInput")
             fetch(url + "?path=Sheet1&action=update&Users=" + myInput.value + "&number=3")
             MyInput.value = ""
             fetch(url + "?path=Sheet1&action=read")
