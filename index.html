@@ -1,62 +1,119 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Website</title>
-    <link href="style.css" rel="stylesheet">
-</head>
-<body onload="onLoad('myInput')">
-<!--if not chrome write, clear input, then read-->
-    <input id="myInput">
-    <button onclick="comment('myInput', 'myOutput')">Comment</button>
-    <!--if chrome write, then reload-->
-    <button onclick="refresh()">Refresh</button>
-    <!--reload-->
-    <div id="myOutput"></div>
-    <a href="chess.html">chess<a>
-    <script>
-        var mainContainer = document.getElementById("myData")
-        var isChrome = !!window.chrome
-        var url = "https://script.google.com/macros/s/AKfycbxz8NdaAxt2Ps5qNdtbN0C-4LEgaCOfdWBc2XCjxoa54MlL1dae5yb03F4vU1X3D0BogQ/exec"
-
-        function comment(input, output) {
-            if(isChrome) {
-                comment2(input, output)
-                location.reload()
-            } else {
-                location.reload()
-            }
-        }
-        function refresh() {
-            location.reload()
-        }
-        function onLoad(input) {
-            var myInput = document.getElementById("myInput")
-            fetch(url + "?path=Sheet1&action=update&Users=" + myInput.value + "&number=3")
-            myInput.value = ""
-            fetch(url + "?path=Sheet1&action=read")
-            .then(res => res.json())
-            .then(data => onLoad2(data))
-        }
-        function onLoad2(x) {
-            for(let i = 0; i < x.data.length; i++) {
-                let div = document.createElement("div")
-                div.innerHTML = x.data[i].Users
-                mainContainer.appendChild(div);
-            }
-        }
-        function comment2(input, output) {
-            var myInput = document.getElementById(input)
-            fetch(url + "?path=Sheet1&action=update&Users=" + myInput.value + "&number=3")
-            myInput.value = ""
-            fetch(url + "?path=Sheet1&action=read")
-            .then(res => res.json())
-            .then(data => comment3(data, output))
-        }
-        function comment3(x, output) {
-            let div = document.createElement(output)
-            div.innerHTML = x.data[x.data.length - 1].Users
-            mainContainer.appendChild(div);
-        }
-    </script>
-</body>
+<table>
+<tr>
+    <td id="18" onclick="func('18')">Rook</td>
+    <td id="28" onclick="clicked('28')">Knight</td>
+    <td id="38" onclick="clicked('38')">Bishop</td>
+    <td id="48" onclick="clicked('48')">Queen</td>
+    <td id="58" onclick="clicked('58')">King</td>
+    <td id="68" onclick="clicked('68')">Bishop</td>
+    <td id="78" onclick="clicked('78')">Knight</td>
+    <td id="88" onclick="clicked('88')">Rook</td>
+</tr>
+<tr>
+    <td id="17" onclick="clicked('17')">Pawn</td>
+    <td id="27" onclick="clicked('27')">Pawn</td>
+    <td id="37" onclick="clicked('37')">Pawn</td>
+    <td id="47" onclick="clicked('47')">Pawn</td>
+    <td id="57" onclick="clicked('57')">Pawn</td>
+    <td id="67" onclick="clicked('67')">Pawn</td>
+    <td id="77" onclick="clicked('77')">Pawn</td>
+    <td id="87" onclick="clicked('87')">Pawn</td>
+</tr>
+<tr>
+    <td id="16" onclick="clicked('16')"></td>
+    <td id="26" onclick="clicked('26')"></td>
+    <td id="36" onclick="clicked('36')"></td>
+    <td id="46" onclick="clicked('46')"></td>
+    <td id="56" onclick="clicked('56')"></td>
+    <td id="66" onclick="clicked('66')"></td>
+    <td id="76" onclick="clicked('76')"></td>
+    <td id="86" onclick="clicked('86')"></td>
+</tr>
+<tr>
+    <td id="15" onclick="clicked('15')"></td>
+    <td id="25" onclick="clicked('25')"></td>
+    <td id="35" onclick="clicked('35')"></td>
+    <td id="45" onclick="clicked('45')"></td>
+    <td id="55" onclick="clicked('55')"></td>
+    <td id="65" onclick="clicked('65')"></td>
+    <td id="75" onclick="clicked('75')"></td>
+    <td id="85" onclick="clicked('85')"></td>
+</tr>
+<tr>
+    <td id="14" onclick="clicked('14')"></td>
+    <td id="24" onclick="clicked('24')"></td>
+    <td id="34" onclick="clicked('34')"></td>
+    <td id="44" onclick="clicked('44')"></td>
+    <td id="54" onclick="clicked('54')"></td>
+    <td id="64" onclick="clicked('64')"></td>
+    <td id="74" onclick="clicked('74')"></td>
+    <td id="84" onclick="clicked('84')"></td>
+</tr>
+<tr>
+    <td id="13" onclick="clicked('13')"></td>
+    <td id="23" onclick="clicked('23')"></td>
+    <td id="33" onclick="clicked('33')"></td>
+    <td id="43" onclick="clicked('43')"></td>
+    <td id="53" onclick="clicked('53')"></td>
+    <td id="63" onclick="clicked('63')"></td>
+    <td id="73" onclick="clicked('73')"></td>
+    <td id="83" onclick="clicked('83')"></td>
+</tr>
+<tr>
+    <td id="12" onclick="clicked('12')">Pawn</td>
+    <td id="22" onclick="clicked('22')">Pawn</td>
+    <td id="32" onclick="clicked('32')">Pawn</td>
+    <td id="42" onclick="clicked('42')">Pawn</td>
+    <td id="52" onclick="clicked('52')">Pawn</td>
+    <td id="62" onclick="clicked('62')">Pawn</td>
+    <td id="72" onclick="clicked('72')">Pawn</td>
+    <td id="82" onclick="clicked('82')">Pawn</td>
+</tr>
+<tr>
+    <td id="11" onclick="clicked('11')">Rook</td>
+    <td id="21" onclick="clicked('21')">Knight</td>
+    <td id="31" onclick="clicked('31')">Bishop</td>
+    <td id="41" onclick="clicked('41')">Queen</td>
+    <td id="51" onclick="clicked('51')">King</td>
+    <td id="61" onclick="clicked('61')">Bishop</td>
+    <td id="71" onclick="clicked('71')">Knight</td>
+    <td id="81" onclick="clicked('81')">Rook</td>
+</tr>
+</table>
 </html>
+
+<script>
+    var counter = 0
+    var elementText1
+    var element1
+    var background1
+    function clicked(x) {
+        if(counter == 0) {
+            element1 = document.getElementById(x)
+            elementText1 = element1.innerHTML
+            counter++
+            return
+        }
+        if(counter == 1) {
+            document.getElementById(x).innerHTML = elementText1
+            element1.innerHTML = ""
+            counter = 0
+        }
+    }
+    //load game
+    //record all changes
+    //say who's playing
+    //submit
+    //refresh
+</script>
+<style>
+td {
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    text-align: center;
+    vertical-align: middle;    
+}
+</style>
