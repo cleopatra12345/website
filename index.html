@@ -32,7 +32,7 @@
         function onLoad(input) {
             var myInput = document.getElementById("myInput")
             fetch(url + "?path=Sheet1&action=update&Users=" + myInput.value + "&number=3")
-            MyInput.value = ""
+            myInput.value = ""
             fetch(url + "?path=Sheet1&action=read")
             .then(res => res.json())
             .then(data => onLoad2(data))
