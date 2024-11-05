@@ -31,8 +31,8 @@
         }
         function onLoad(input) {
             var myInput = document.getElementById(input)
-            fetch(url + "?path=Sheet1&action=update&Users=" + input.value + "&number=3")
-            input.value = ""
+            fetch(url + "?path=Sheet1&action=update&Users=" + myInput.value + "&number=3")
+            MyInput.value = ""
             fetch(url + "?path=Sheet1&action=read")
             .then(res => res.json())
             .then(data => onLoad2(data))
@@ -46,8 +46,8 @@
         }
         function comment2(input, output) {
             var myInput = document.getElementById(input)
-            fetch(url + "?path=Sheet1&action=update&Users=" + input.value + "&number=3")
-            input.value = ""
+            fetch(url + "?path=Sheet1&action=update&Users=" + myInput.value + "&number=3")
+            myInput.value = ""
             fetch(url + "?path=Sheet1&action=read")
             .then(res => res.json())
             .then(data => comment3(data, output))
