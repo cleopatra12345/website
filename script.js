@@ -18,9 +18,9 @@ var mainContainer = document.getElementById("myOutput")
     //if not chrome write, clear input, then read
     function onLoad(input) {
         var myInput = document.getElementById(input)
-        fetch(url + "?path=Sheet1&action=update&Users=" + myInput.value + "&number=3")
+        fetch(url + "?path=Sheet2&action=write&Users=" + myInput.value)
         myInput.value = ""
-        fetch(url + "?path=Sheet1&action=read")
+        fetch(url + "?path=Sheet2&action=read")
         .then(res => res.json())
         .then(data => onLoad2(data))
     }
@@ -33,9 +33,9 @@ var mainContainer = document.getElementById("myOutput")
     }
     function comment2(input, output) {
         var myInput = document.getElementById(input)
-        fetch(url + "?path=Sheet1&action=update&Users=" + myInput.value + "&number=3")
+        fetch(url + "?path=Sheet2&action=write&Users=" + myInput.value)
         myInput.value = ""
-        fetch(url + "?path=Sheet1&action=read")
+        fetch(url + "?path=Sheet2&action=read")
         .then(res => res.json())
         .then(data => comment3(data, output))
     }
