@@ -86,6 +86,7 @@
 </table>
 <button onclick="submit()">Submit</button>
 <button onclick="location.reload()">Cancel/Reload</button>
+<button onClick="notify()">Notification</button>
 </body>
 </html>
 
@@ -128,6 +129,9 @@
     function submit() {
         send("", parseInt(position1)+2)
         send(elementText1, parseInt(position2)+2)
+    }
+    function notify() {
+        new Notification("Example")
     }
 </script>
 <style>
