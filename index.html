@@ -1,168 +1,57 @@
-<!DOCTYPE html>
 <html>
-<body onload="onLoad()">
-<a href="chat.html">chat</a>
-<a href="notification.html">notif</a>
-<table>
-<tr>
-    <td class="light" id="11" onclick="clicked('11')"></td>
-    <td class="dark" id="12" onclick="clicked('12')"></td>
-    <td class="light" id="13" onclick="clicked('13')"></td>
-    <td class="dark" id="14" onclick="clicked('14')"></td>
-    <td class="light" id="15" onclick="clicked('15')"></td>
-    <td class="dark" id="16" onclick="clicked('16')"></td>
-    <td class="light" id="17" onclick="clicked('17')"></td>
-    <td class="dark" id="18" onclick="clicked('18')"></td>
-</tr>
-<tr>
-    <td class="dark" id="21" onclick="clicked('21')"></td>
-    <td class="light" id="22" onclick="clicked('22')"></td>
-    <td class="dark" id="23" onclick="clicked('23')"></td>
-    <td class="light" id="24" onclick="clicked('24')"></td>
-    <td class="dark" id="25" onclick="clicked('25')"></td>
-    <td class="light" id="26" onclick="clicked('26')"></td>
-    <td class="dark" id="27" onclick="clicked('27')"></td>
-    <td class="light" id="28" onclick="clicked('28')"></td>
-</tr>
-<tr>
-    <td class="light" id="31" onclick="clicked('31')"></td>
-    <td class="dark" id="32" onclick="clicked('32')"></td>
-    <td class="light" id="33" onclick="clicked('33')"></td>
-    <td class="dark" id="34" onclick="clicked('34')"></td>
-    <td class="light" id="35" onclick="clicked('35')"></td>
-    <td class="dark" id="36" onclick="clicked('36')"></td>
-    <td class="light" id="37" onclick="clicked('37')"></td>
-    <td class="dark" id="38" onclick="clicked('38')"></td>
-</tr>
-<tr>
-    <td class="dark" id="41" onclick="clicked('41')"></td>
-    <td class="light" id="42" onclick="clicked('42')"></td>
-    <td class="dark" id="43" onclick="clicked('43')"></td>
-    <td class="light" id="44" onclick="clicked('44')"></td>
-    <td class="dark" id="45" onclick="clicked('45')"></td>
-    <td class="light" id="46" onclick="clicked('46')"></td>
-    <td class="dark" id="47" onclick="clicked('47')"></td>
-    <td class="light" id="48" onclick="clicked('48')"></td>
-</tr>
-<tr>
-    <td class="light" id="51" onclick="clicked('51')"></td>
-    <td class="dark" id="52" onclick="clicked('52')"></td>
-    <td class="light" id="53" onclick="clicked('53')"></td>
-    <td class="dark" id="54" onclick="clicked('54')"></td>
-    <td class="light" id="55" onclick="clicked('55')"></td>
-    <td class="dark" id="56" onclick="clicked('56')"></td>
-    <td class="light" id="57" onclick="clicked('57')"></td>
-    <td class="dark" id="58" onclick="clicked('58')"></td>
-</tr>
-<tr>
-    <td class="dark" id="61" onclick="clicked('61')"></td>
-    <td class="light" id="62" onclick="clicked('62')"></td>
-    <td class="dark" id="63" onclick="clicked('63')"></td>
-    <td class="light" id="64" onclick="clicked('64')"></td>
-    <td class="dark" id="65" onclick="clicked('65')"></td>
-    <td class="light" id="66" onclick="clicked('66')"></td>
-    <td class="dark" id="67" onclick="clicked('67')"></td>
-    <td class="light" id="68" onclick="clicked('68')"></td>
-</tr>
-<tr>
-    <td class="light" id="71" onclick="clicked('71')"></td>
-    <td class="dark" id="72" onclick="clicked('72')"></td>
-    <td class="light" id="73" onclick="clicked('73')"></td>
-    <td class="dark" id="74" onclick="clicked('74')"></td>
-    <td class="light" id="75" onclick="clicked('75')"></td>
-    <td class="dark" id="76" onclick="clicked('76')"></td>
-    <td class="light" id="77" onclick="clicked('77')"></td>
-    <td class="dark" id="78" onclick="clicked('78')"></td>
-</tr>
-<tr>
-    <td class="dark" id="81" onclick="clicked('81')"></td>
-    <td class="light" id="82" onclick="clicked('82')"></td>
-    <td class="dark" id="83" onclick="clicked('83')"></td>
-    <td class="light" id="84" onclick="clicked('84')"></td>
-    <td class="dark" id="85" onclick="clicked('85')"></td>
-    <td class="light" id="86" onclick="clicked('86')"></td>
-    <td class="dark" id="87" onclick="clicked('87')"></td>
-    <td class="light" id="88" onclick="clicked('88')"></td>
-</tr>
-</table>
-<button onclick="submit()">Submit</button>
-<button onclick="location.reload()">Cancel/Reload</button>
-<button onclick="request()">Request</button>
-<button onClick="notify()">Notification</button>
+<body onload="onLoad('myInput', 'myOutput')">
+    <h1>welcome to the room</h1>
+    <input id="myInput">
+    <button onclick="addChar('myInput', 'myOutput')">add character</button>
+    <button onclick="refresh()">refresh</button>
+    <div id="myOutput"></div>
 </body>
 </html>
-
 <script>
-    var url = "https://script.google.com/macros/s/AKfycbxz8NdaAxt2Ps5qNdtbN0C-4LEgaCOfdWBc2XCjxoa54MlL1dae5yb03F4vU1X3D0BogQ/exec"
-    var counter = 0
-    var elementText1
-    var element1
-    var position1
-    var positino2
-    function clicked(x) {
-        if(counter == 0) {
-            position1 = x
-            element1 = document.getElementById(x)
-            elementText1 = element1.innerHTML
-            counter++
-            return
-        }
-        if(counter == 1) {
-            position2 = x
-            element1.innerHTML = ""
-            document.getElementById(x).innerHTML = elementText1
-        }
+var mainContainer = document.getElementById("myOutput")
+var isChrome = !!window.chrome
+var url = "https://script.google.com/macros/s/AKfycbxz8NdaAxt2Ps5qNdtbN0C-4LEgaCOfdWBc2XCjxoa54MlL1dae5yb03F4vU1X3D0BogQ/exec"
+
+//if chrome write, then reload
+function addChar(input, output) {
+    if(isChrome) {
+        comment2(input, output)
+        location.reload()
+    } else {
+        location.reload()
     }
-    function onLoad() {
-        fetch(url + "?path=Sheet1&action=read")
-        .then(res => res.json())
-        .then(data => onLoad2(data))
+}
+function refresh() {
+    location.reload()
+}
+
+//if not chrome write, clear input, then read
+function onLoad(input, output) {
+    var myInput = document.getElementById(input)
+    fetch(url + "?path=Sheet3&action=write&Users=" + myInput.value)
+    myInput.value = ""
+    fetch(url + "?path=Sheet3&action=read")
+    .then(res => res.json())
+    .then(data => onLoad2(data, output))
+}
+function onLoad2(dbData, outputContainer) {
+    for(let i = 0; i < dbData.data.length; i++) {
+        let div = document.createElement(outputContainer)
+        div.innerHTML = dbData.data[i].Users
+        mainContainer.appendChild(div);
     }
-    function onLoad2(x) {
-        for(let i = 1; i <= 8; i++) {
-            for(let j = 1; j <= 8; j++) {
-                document.getElementById((i).toString() + (j).toString()).innerHTML = x.data[10*i + j].Users
-            }
-        }
-    }
-    function send(change, position) {
-        fetch(url + "?path=Sheet1&action=update&Users=" + change + "&number=" + position)
-    }
-    function submit() {
-        send("", parseInt(position1)+2)
-        send(elementText1, parseInt(position2)+2)
-    }
-    function request() {
-        Notification.requestPermission().then(perm => {
-            alert(perm)
-        })
-    }
-    function notify() {
-        new Notification("Example")
-    }
+}
+function comment2(input, output) {
+    var myInput = document.getElementById(input)
+    fetch(url + "?path=Sheet3&action=write&Users=" + myInput.value)
+    myInput.value = ""
+    fetch(url + "?path=Sheet3&action=read")
+    .then(res => res.json())
+    .then(data => comment3(data, output))
+}
+function comment3(dbData, outputContainer) {
+    let div = document.createElement(outputContainer)
+    div.innerHTML = dbData.data[dbData.data.length - 1].Users
+    mainContainer.appendChild(div);
+}
 </script>
-<style>
-td {
-    width: 60px;
-    height: 60px;
-    border: 1px solid black;
-    text-align: center;
-    vertical-align: middle;    
-}
-.light {
-    background-color:white
-}
-.dark {
-    background-color:burlywood
-}
-button {
-    background-color: #04AA6D;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 263px;
-    opacity: 0.9;
-}
-</style>
