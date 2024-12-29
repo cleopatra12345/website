@@ -5,8 +5,9 @@
 </head>
 <body>
     <form>
-    <select>
-        <option>A</option>
+    <select id="input1">
+        <option value="A">A</option>
+        <option value="B">B</option>
     </select>
     <select>
         <option>A</option>
@@ -22,7 +23,6 @@
 var url = "https://script.google.com/macros/s/AKfycbxz8NdaAxt2Ps5qNdtbN0C-4LEgaCOfdWBc2XCjxoa54MlL1dae5yb03F4vU1X3D0BogQ/exec"
 //if chrome write, then reload
 function createChar() {
-    
-    fetch(url + "?path=Sheet3&action=write&Users=" + myInput.value)
-    myInput.value = ""
+    var input = getelementbyid("input1")
+    fetch(url + "?path=Sheet3&action=write&Users=" + input)
 </script>
