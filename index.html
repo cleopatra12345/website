@@ -2,13 +2,7 @@
 <body onload="onLoad('myInput', 'myOutput')">
     <h1>welcome to the room</h1>
     <input id="myInput">
-    <button onclick="addChar('myInput', 'myOutput')">add character</button>
-    <button onclick="refresh()">refresh</button>
-    <form>
-    <select>
-        <option>A</option>
-    </select>
-    </form>
+    <a href="createChar.html"></a>
     <div id="myOutput"></div>
 </body>
 </html>
@@ -18,7 +12,7 @@ var isChrome = !!window.chrome
 var url = "https://script.google.com/macros/s/AKfycbxz8NdaAxt2Ps5qNdtbN0C-4LEgaCOfdWBc2XCjxoa54MlL1dae5yb03F4vU1X3D0BogQ/exec"
 
 //if chrome write, then reload
-function addChar(input, output) {
+function inputData(input, output) {
     if(isChrome) {
         comment2(input, output)
         location.reload()
