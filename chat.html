@@ -19,7 +19,9 @@
 </body>
 </html>
 <script>
+//if chrome write, then reload
 function createChar() {
     
-}
+    fetch(url + "?path=Sheet3&action=write&Users=" + myInput.value)
+    myInput.value = ""
 </script>
