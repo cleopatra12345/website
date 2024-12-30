@@ -1,34 +1,28 @@
+<!DOCTYPE html>
 <html>
-<body onload="onLoad('myInput', 'myOutput')">
+<body onload="onLoad('myOutput')">
     <h1>welcome to the room</h1>
-    <input id="myInput">
-    <a href="chat.html">create character</a>
+    <form>
+        <select id="input1">
+            <option value="A">A</option>
+            <option value="B">B</option>
+        </select>
+        <select>
+            <option>A</option>
+        </select>
+        <select>
+            <option>A</option>
+        </select>
+        <button onclick="createChar('myOutput')">create</button>
+    </form>
     <div id="myOutput"></div>
 </body>
 </html>
 <script>
 var mainContainer = document.getElementById("myOutput")
-var isChrome = !!window.chrome
 var url = "https://script.google.com/macros/s/AKfycbxz8NdaAxt2Ps5qNdtbN0C-4LEgaCOfdWBc2XCjxoa54MlL1dae5yb03F4vU1X3D0BogQ/exec"
 
-//if chrome write, then reload
-function inputData(input, output) {
-    if(isChrome) {
-        comment2(input, output)
-        location.reload()
-    } else {
-        location.reload()
-    }
-}
-function refresh() {
-    location.reload()
-}
-
-//if not chrome write, clear input, then read
-function onLoad(input, output) {
-    var myInput = document.getElementById(input)
-    fetch(url + "?path=Sheet3&action=write&Users=" + myInput.value)
-    myInput.value = ""
+function onLoad(output) {
     fetch(url + "?path=Sheet3&action=read")
     .then(res => res.json())
     .then(data => onLoad2(data, output))
@@ -37,13 +31,11 @@ function onLoad2(dbData, outputContainer) {
     for(let i = 0; i < dbData.data.length; i++) {
         let div = document.createElement(outputContainer)
         div.innerHTML = dbData.data[i].Users
-        mainContainer.appendChild(div);
+        mainContainer.appendChild(div)
     }
 }
-function comment2(input, output) {
-    var myInput = document.getElementById(input)
-    fetch(url + "?path=Sheet3&action=write&Users=" + myInput.value)
-    myInput.value = ""
+function createChar(output) {
+    fetch(url + "?path=Sheet3&action=write&Users=" + "AAA")
     fetch(url + "?path=Sheet3&action=read")
     .then(res => res.json())
     .then(data => comment3(data, output))
@@ -51,6 +43,6 @@ function comment2(input, output) {
 function comment3(dbData, outputContainer) {
     let div = document.createElement(outputContainer)
     div.innerHTML = dbData.data[dbData.data.length - 1].Users
-    mainContainer.appendChild(div);
+    mainContainer.appendChild(div)
 }
 </script>
