@@ -90,20 +90,35 @@
     </form>
     <button onclick="createChar()">create</button>
     <div id="1"></div>
+    <button>1</button>
     <div id="2"></div>
+    <button>1</button>
     <div id="3"></div>
+    <button>1</button>
     <div id="4"></div>
+    <button>1</button>
     <div id="5"></div>
+    <button>1</button>
     <div id="6"></div>
+    <button>1</button>
     <div id="7"></div>
+    <button>1</button>
     <div id="8"></div>
+    <button>1</button>
     <div id="9"></div>
+    <button>1</button>
 </body>
 </html>
 <script>
 var url = "https://script.google.com/macros/s/AKfycbxz8NdaAxt2Ps5qNdtbN0C-4LEgaCOfdWBc2XCjxoa54MlL1dae5yb03F4vU1X3D0BogQ/exec"
 
 function onLoad() {
+let container = document.getElementById(4)
+let div = document.createElement()
+div.innerHTML = "Yay"
+container.appendChild(div)
+}
+function onLoade() {
     fetch(url + "?path=Sheet3&action=read")
     .then(res => res.json())
     .then(data => onLoad2(data))
@@ -115,7 +130,7 @@ function onLoad2(dbData) {
     for(let i = 0; i < dbData.data.length; i++) {
         let div = document.createElement(document.getElementById(i))
         div.innerHTML = dbData.data[i].Users
-        mainContainer.appendChild(div)
+        div.appendChild(div)
     }
 }
 function createChar() {
