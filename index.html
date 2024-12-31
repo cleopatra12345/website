@@ -103,7 +103,7 @@
 <script>
 var url = "https://script.google.com/macros/s/AKfycbxz8NdaAxt2Ps5qNdtbN0C-4LEgaCOfdWBc2XCjxoa54MlL1dae5yb03F4vU1X3D0BogQ/exec"
 
-function onLoad(output) {
+function onLoad() {
     fetch(url + "?path=Sheet3&action=read")
     .then(res => res.json())
     .then(data => onLoad2(data))
@@ -118,12 +118,12 @@ function onLoad2(dbData) {
         mainContainer.appendChild(div)
     }
 }
-function createChar(output) {
+function createChar() {
     fetch(url + "?path=Sheet3&action=read")
     .then(res => res.json())
-    .then(data => comment2(data, output))
+    .then(data => comment2(data))
 }
-function comment2(dbData, output) {
+function comment2(dbData) {
     if(dbData.data.length >= 9) {
         console.log("limit reached")
     } else {
@@ -131,14 +131,15 @@ function comment2(dbData, output) {
         fetch(url + "?path=Sheet2&action=write&Users=1")
         fetch(url + "?path=Sheet3&action=read")
         .then(res => res.json())
-        .then(data => comment3(dbData, output))
+        .then(data => comment3(dbData))
         fetch(url + "?path=Sheet2&action=read")
         .then(res => res.json())
-        .then(data => comment3(dbData, output))
+        .then(data => comment3(dbData))
     }
 }
-function comment3(dbData, outputContainer) {
-    let div = document.createElement(outputContainer)
+function comment3(dbData) {
+    var container = document.getElementById(dbData.data.length)
+    let div = document.createElement(container)
     div.innerHTML = dbData.data[dbData.data.length - 1].Users
     mainContainer.appendChild(div)
 }
