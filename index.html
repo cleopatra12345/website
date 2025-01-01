@@ -113,12 +113,6 @@
 var url = "https://script.google.com/macros/s/AKfycbxz8NdaAxt2Ps5qNdtbN0C-4LEgaCOfdWBc2XCjxoa54MlL1dae5yb03F4vU1X3D0BogQ/exec"
 
 function onLoad() {
-let container = document.getElementById("4")
-let div = document.createElement(container)
-div.innerHTML = "Yay"
-container.appendChild(div)
-}
-function onLoade() {
     fetch(url + "?path=Sheet3&action=read")
     .then(res => res.json())
     .then(data => onLoad2(data))
@@ -127,10 +121,10 @@ function onLoade() {
     .then(data => onLoad2(data))
 }
 function onLoad2(dbData) {
-    for(let i = 0; i < dbData.data.length; i++) {
-        let div = document.createElement(document.getElementById(i))
+    for(let i = 1; i < dbData.data.length; i++) {
+        let div = document.createElement("test")
         div.innerHTML = dbData.data[i].Users
-        div.appendChild(div)
+        document.getElementById(i).appendChild(div)
     }
 }
 function createChar() {
@@ -153,9 +147,8 @@ function comment2(dbData) {
     }
 }
 function comment3(dbData) {
-    var container = document.getElementById(dbData.data.length)
-    let div = document.createElement(container)
+    let div = document.createElement("test")
     div.innerHTML = dbData.data[dbData.data.length - 1].Users
-    mainContainer.appendChild(div)
+    document.getElementById(dbData.data.length).appendChild(div)
 }
 </script>
