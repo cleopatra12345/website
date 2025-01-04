@@ -161,7 +161,7 @@ function update2(dbData, id, positive) {
     positive ? newValue++ : newValue--
     id++
     id++
-document.getElementById(9).innerHTML = "update"
+document.getElementById(8).innerHTML = "update"
     if(newValue > 0) {
         fetch(url + "?path=Sheet2&action=update&Users=" + newValue + "&number=" + id)
         reset()
