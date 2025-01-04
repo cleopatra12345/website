@@ -164,7 +164,6 @@ function update2(dbData, id, positive) {
     if(newValue > 0) {
         fetch(url + "?path=Sheet2&action=update&Users=" + newValue + "&number=" + id)
         reset()
-document.getElementById(8).innerHTML = id 
         fetch(url + "?path=Sheet2&action=read")
         .then(res => res.json())
         .then(data => onLoad2(data))
