@@ -90,28 +90,27 @@
     </form>
     <button onclick="createChar()">create</button>
     <div id="0"></div>
-    <button onclick="update('0')">+</button><button onclick="update('0')">-</button>
-    <div id="1"></div>
-    <button onclick="update('1')">+</button><button>-</button>
-    <div id="2"></div>
-    <button onclick="update('2')">+</button><button>-</button>
-    <div id="3"></div>
-    <button>+</button><button>-</button>
-    <div id="4"></div>
-    <button>+</button><button>-</button>
-    <div id="5"></div>
-    <button>+</button><button>-</button>
-    <div id="6"></div>
-    <button>+</button><button>-</button>
-    <div id="7"></div>
-    <button>+</button><button>-</button>
-    <div id="8"></div>
-    <button>+</button><button>-</button>
+    <button onclick="update('0', true)">+</button><button onclick="update('0', false)">-</button>
+    <div class="chars" id="1"></div>
+    <button onclick="update('1', true)">+</button><button onclick="update('1', false)">-</button>
+    <div class="chars" id="2"></div>
+    <button onclick="update('2', true)">+</button><button onclick="update('2', false)">-</button>
+    <div class="chars" id="3"></div>
+    <button onclick="update('3', true)">+</button><button onclick="update('3', false)">-</button>
+    <div class="chars" id="4"></div>
+    <button onclick="update('4', true)">+</button><button onclick="update('4', false)">-</button>
+    <div class="chars" id="5"></div>
+    <button onclick="update('5', true)">+</button><button onclick="update('5', false)">-</button>
+    <div class="chars" id="6"></div>
+    <button onclick="update('6', true)">+</button><button onclick="update('6', false)">-</button>
+    <div class="chars" id="7"></div>
+    <button onclick="update('7', true)">+</button><button onclick="update('7', false)">-</button>
+    <div class="chars" id="8"></div>
+    <button onclick="update('8', true)">+</button><button onclick="update('8', false)">-</button>
 </body>
 </html>
 <script>
-var url = "https://script.google.com/macros/s/AKfycbxz8NdaAxt2Ps5qNdtbN0C-4LEgaCOfdWBc2XCjxoa54MlL1dae5yb03F4vU1X3D0BogQ/exec"
-
+var url = "https://script.google.com/macros/s/AKfycbyM5GAh1_QwBqkds9it1bMAflcwrT3v9k7k3XF0WgIfVN56bI4qPlYFukJz_Fdv6NrSNg/exec"
 function onLoad() {
     fetch(url + "?path=Sheet3&action=read")
     .then(res => res.json())
@@ -136,14 +135,15 @@ function comment2(dbData) {
     if(dbData.data.length >= 9) {
         console.log("limit reached")
     } else {
-        fetch(url + "?path=Sheet3&action=write&Users=" + document.getElementById("input1").value + document.getElementById("input2").value + document.getElementById("input3").value)
+        var name = document.getElementById("input1").value + document.getElementById("input2").value + document.getElementById("input3").value
+        fetch(url + "?path=Sheet3&action=write&Users=" + name)
         fetch(url + "?path=Sheet2&action=write&Users=1")
-        fetch(url + "?path=Sheet3&action=read")
-        .then(res => res.json())
-        .then(data => comment3(dbData))
-        fetch(url + "?path=Sheet2&action=read")
-        .then(res => res.json())
-        .then(data => comment3(dbData))
+        let div1 = document.createElement("test")
+        div1.innerHTML = name
+        document.getElementById(dbData.data.length).appendChild(div1)
+        let div2 = document.createElement("test")
+        div2.innerHTML = 1
+        document.getElementById(dbData.data.length).appendChild(div2)
     }
 }
 function comment3(dbData) {
@@ -151,15 +151,38 @@ function comment3(dbData) {
     div.innerHTML = dbData.data[dbData.data.length - 1].Users
     document.getElementById(dbData.data.length).appendChild(div)
 }
-function update(id) {
+function update(id, positive) {
     fetch(url + "?path=Sheet2&action=read")
     .then(res => res.json())
-    .then(data => update2(data, id))
+    .then(data => update2(data, id, positive))
 }
-function update2(dbData, id) {
+function update2(dbData, id, positive) {
     var newValue = dbData.data[id].Users
-    newValue++
-    id = id + 2 //the positions are messed up cause of chess grid  
-    fetch(url + "?path=Sheet2&action=update&Users=" + newValue + "&number=" + id)
+    positive ? newValue++ : newValue--
+    id++
+    id++
+    if(newValue > 0) {
+        fetch(url + "?path=Sheet2&action=update&Users=" + newValue + "&number=" + id)
+        reset()
+        fetch(url + "?path=Sheet2&action=read")
+        .then(res => res.json())
+        .then(data => onLoad2(data))
+        fetch(url + "?path=Sheet3&action=read")
+        .then(res => res.json())
+        .then(data => onLoad2(data))
+    } else {
+        fetch(url + "?path=Sheet2&action=remove&number=" + id)
+        fetch(url + "?path=Sheet3&action=remove&number=" + id)
+        document.getElementById(id - 2).innerHTML = ""
+    }
+}
+function reset() {
+    for(let i = 0; i < 9; i++) {
+        document.getElementById(i).innerHTML = ""
+    }
 }
 </script>
+<style>
+    .chars{
+    }
+</style>
