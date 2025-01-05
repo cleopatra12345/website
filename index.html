@@ -116,18 +116,18 @@ function onLoad() {
     awaiting = true
     fetch(url + "?path=Sheet3&action=read")
     .then(res => res.json())
-    .then(data => onLoad2(data, true))
+    .then(data => onLoad2(data))
     fetch(url + "?path=Sheet2&action=read")
     .then(res => res.json())
-    .then(data => onLoad2(data, true))
+    .then(data => onLoad2(data))
 }
-function onLoad2(dbData, awaitingState) {
+function onLoad2(dbData) {
     for(let i = 0; i < dbData.data.length; i++) {
         let div = document.createElement("test")
         div.innerHTML = dbData.data[i].Users
         document.getElementById(i).appendChild(div)
-awating = awaitingState
     }
+    awataing = false
 }
 function createChar() {
     if(!awaiting) {
