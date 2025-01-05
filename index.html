@@ -110,26 +110,32 @@
 </body>
 </html>
 <script>
+var awaiting = true
 var url = "https://script.google.com/macros/s/AKfycbx01WayjWlnC3uo5NrUUXI-Pk7k71Oe7ovdwzClJIRKjN3UsyDrv1gAfXhtmqwSaLoNXA/exec"
 function onLoad() {
+    awaiting = true
     fetch(url + "?path=Sheet3&action=read")
     .then(res => res.json())
-    .then(data => onLoad2(data))
+    .then(data => onLoad2(data, true))
     fetch(url + "?path=Sheet2&action=read")
     .then(res => res.json())
-    .then(data => onLoad2(data))
+    .then(data => onLoad2(data, false))
 }
-function onLoad2(dbData) {
+function onLoad2(dbData, awaitingState) {
     for(let i = 0; i < dbData.data.length; i++) {
         let div = document.createElement("test")
         div.innerHTML = dbData.data[i].Users
         document.getElementById(i).appendChild(div)
+awating = awaitingState
     }
 }
 function createChar() {
-    fetch(url + "?path=Sheet3&action=read")
-    .then(res => res.json())
-    .then(data => comment2(data))
+    if(!awaiting) {
+        awaiting = true
+        fetch(url + "?path=Sheet3&action=read")
+        .then(res => res.json())
+        .then(data => comment2(data))
+    }
 }
 function comment2(dbData) {
     if(dbData.data.length >= 9) {
@@ -145,6 +151,7 @@ function comment2(dbData) {
         div2.innerHTML = 1
         document.getElementById(dbData.data.length).appendChild(div2)
     }
+    awaiting = false
 }
 function comment3(dbData) {
     let div = document.createElement("test")
@@ -152,9 +159,12 @@ function comment3(dbData) {
     document.getElementById(dbData.data.length).appendChild(div)
 }
 function update(id, positive) {
-    fetch(url + "?path=Sheet2&action=read")
-    .then(res => res.json())
-    .then(data => update2(data, id, positive))
+    if(!awaiting) {
+        awaiting = true
+        fetch(url + "?path=Sheet2&action=read")
+        .then(res => res.json())
+        .then(data => update2(data, id, positive))
+    }
 }
 function update2(dbData, id, positive) {
     var newValue = dbData.data[id].Users
@@ -175,6 +185,7 @@ function update2(dbData, id, positive) {
         fetch(url + "?path=Sheet3&action=remove&number=" + id)
         document.getElementById(id - 2).innerHTML = ""
     }
+    awating = false
 }
 function reset() {
     for(let i = 0; i < 9; i++) {
