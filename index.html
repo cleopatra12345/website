@@ -140,7 +140,7 @@
 var awaiting = false
 var url = "https://script.google.com/macros/s/AKfycbx01WayjWlnC3uo5NrUUXI-Pk7k71Oe7ovdwzClJIRKjN3UsyDrv1gAfXhtmqwSaLoNXA/exec"
 function onLoad() {
-    awaiting = true
+    setAwaiting(true)
     fetch(url + "?path=Sheet3&action=read")
     .then(res => res.json())
     .then(data => onLoad2(data))
@@ -155,11 +155,11 @@ function onLoad2(dbData) {
         div.innerHTML = dbData.data[i].Users
         document.getElementById(i).appendChild(div)
     }
-    awaiting = false
+    setAwaiting(false)
 }
 function createChar() {
     if(!awaiting) {
-        awaiting = true
+        setAwaiting(true)
         fetch(url + "?path=Sheet3&action=read")
         .then(res => res.json())
         .then(data => comment2(data))
@@ -180,18 +180,18 @@ function comment2(dbData) {
         div2.innerHTML = 1
         document.getElementById(dbData.data.length).appendChild(div2)
     }
-    awaiting = false
+    setAwaiting(false)
 }
 function update(id, positive) {
     if(!awaiting) {
-        awaiting = true
+        setAwaiting(true)
         fetch(url + "?path=Sheet2&action=read")
         .then(res => res.json())
         .then(data => update2(data, id, positive))
     }
 }
 function update2(dbData, idPage, positive) {
-    var newValue = dbData.data[id].Users
+    var newValue = dbData.data[idPage].Users
     positive ? newValue++ : newValue--
     id = idPage + 2
     if(newValue > 0) {
@@ -208,12 +208,15 @@ function update2(dbData, idPage, positive) {
         fetch(url + "?path=Sheet3&action=remove&number=" + id)
         document.getElementById("container" + idPage).style.display = "none"
     }
-    awating = false
+    setAwating(false)
 }
 function reset() {
     for(let i = 0; i < 9; i++) {
         document.getElementById(i).innerHTML = ""
     }
+}
+function setAwaiting(state) {
+    awaiting = state
 }
 </script>
 <style>
