@@ -190,11 +190,10 @@ function update(id, positive) {
         .then(data => update2(data, id, positive))
     }
 }
-function update2(dbData, id, positive) {
+function update2(dbData, idPage, positive) {
     var newValue = dbData.data[id].Users
     positive ? newValue++ : newValue--
-    id++
-    id++
+    id = idPage + 2
     if(newValue > 0) {
         fetch(url + "?path=Sheet2&action=update&Users=" + newValue + "&number=" + id)
         reset()
@@ -207,7 +206,7 @@ function update2(dbData, id, positive) {
     } else {
         fetch(url + "?path=Sheet2&action=remove&number=" + id)
         fetch(url + "?path=Sheet3&action=remove&number=" + id)
-        document.getElementById("container" + id).style.display = "none"
+        document.getElementById("container" + idPage).style.display = "none"
     }
     awating = false
 }
