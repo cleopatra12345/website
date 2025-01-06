@@ -137,8 +137,10 @@
 </body>
 </html>
 <script>
-var url = "https://script.google.com/macros/s/AKfycbyM5GAh1_QwBqkds9it1bMAflcwrT3v9k7k3XF0WgIfVN56bI4qPlYFukJz_Fdv6NrSNg/exec"
+var awaiting = false
+var url = "https://script.google.com/macros/s/AKfycbx01WayjWlnC3uo5NrUUXI-Pk7k71Oe7ovdwzClJIRKjN3UsyDrv1gAfXhtmqwSaLoNXA/exec"
 function onLoad() {
+    awaiting = true
     fetch(url + "?path=Sheet3&action=read")
     .then(res => res.json())
     .then(data => onLoad2(data))
@@ -152,11 +154,15 @@ function onLoad2(dbData) {
         div.innerHTML = dbData.data[i].Users
         document.getElementById(i).appendChild(div)
     }
+    awaiting = false
 }
 function createChar() {
-    fetch(url + "?path=Sheet3&action=read")
-    .then(res => res.json())
-    .then(data => comment2(data))
+    if(!awaiting) {
+        awaiting = true
+        fetch(url + "?path=Sheet3&action=read")
+        .then(res => res.json())
+        .then(data => comment2(data))
+    }
 }
 function comment2(dbData) {
     if(dbData.data.length >= 9) {
@@ -172,16 +178,20 @@ function comment2(dbData) {
         div2.innerHTML = 1
         document.getElementById(dbData.data.length).appendChild(div2)
     }
+    awaiting = false
 }
-function comment3(dbData) {
+function comment3(dbData) { // usesless?
     let div = document.createElement("test")
     div.innerHTML = dbData.data[dbData.data.length - 1].Users
     document.getElementById(dbData.data.length).appendChild(div)
 }
 function update(id, positive) {
-    fetch(url + "?path=Sheet2&action=read")
-    .then(res => res.json())
-    .then(data => update2(data, id, positive))
+    if(!awaiting) {
+        awaiting = true
+        fetch(url + "?path=Sheet2&action=read")
+        .then(res => res.json())
+        .then(data => update2(data, id, positive))
+    }
 }
 function update2(dbData, id, positive) {
     var newValue = dbData.data[id].Users
@@ -202,6 +212,7 @@ function update2(dbData, id, positive) {
         fetch(url + "?path=Sheet3&action=remove&number=" + id)
         document.getElementById(id - 2).innerHTML = ""
     }
+    awating = false
 }
 function reset() {
     for(let i = 0; i < 9; i++) {
