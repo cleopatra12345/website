@@ -89,47 +89,47 @@
         </select>
     </form>
     <button onclick="createChar()">create</button>
-    <div class="container">
-        <img src="smiley.png">
+    <div id="container0" class="container">
+        <img id="img0" src="smiley.png">
         <h2 id="0"></h2>
         <button id="plus" onclick="update('0', true)">+</button><button id="minus" onclick="update('0', false)">-</button>
     </div>
-    <div class="container">
+    <div id="container1" class="container">
         <img src="smiley.png">
         <h2 id="1"></h2>
         <button id="plus" onclick="update('1', true)">+</button><button id="minus" onclick="update('1', false)">-</button>
     </div>
-    <div class="container">
+    <div id="container2" class="container">
         <img src="smiley.png">
         <h2 id="2"></h2>
         <button id="plus" onclick="update('2', true)">+</button><button id="minus" onclick="update('2', false)">-</button>
     </div>
-    <div class="container">
+    <div id="container3" class="container">
         <img src="smiley.png">
         <h2 id="3"></h2>
         <button id="plus" onclick="update('3', true)">+</button><button id="minus" onclick="update('3', false)">-</button>
     </div>
-    <div class="container">
+    <div id="container4" class="container">
         <img src="smiley.png">
         <h2 id="4"></h2>
         <button id="plus" onclick="update('4', true)">+</button><button id="minus" onclick="update('4', false)">-</button>
     </div>
-    <div class="container">
+    <div id="container5" class="container">
         <img src="smiley.png">
         <h2 id="5"></h2>
         <button id="plus" onclick="update('5', true)">+</button><button id="minus" onclick="update('5', false)">-</button>
     </div>
-    <div class="container">
+    <div id="container6" class="container">
         <img src="smiley.png">
         <h2 id="6"></h2>
         <button id="plus" onclick="update('6', true)">+</button><button id="minus" onclick="update('6', false)">-</button>
     </div>
-    <div class="container">
+    <div id="container7" class="container">
         <img src="smiley.png">
         <h2 id="7"></h2>
         <button id="plus" onclick="update('7', true)">+</button><button id="minus" onclick="update('7', false)">-</button>
     </div>
-    <div class="container">
+    <div id="container8" class="container">
         <img src="smiley.png">
         <h2 id="8"></h2>
         <button id="plus" onclick="update('8', true)">+</button><button id="minus" onclick="update('8', false)">-</button>
@@ -150,6 +150,7 @@ function onLoad() {
 }
 function onLoad2(dbData) {
     for(let i = 0; i < dbData.data.length; i++) {
+        document.getElementById("container" + i).style.display = "block"
         let div = document.createElement("test")
         div.innerHTML = dbData.data[i].Users
         document.getElementById(i).appendChild(div)
@@ -171,6 +172,7 @@ function comment2(dbData) {
         var name = document.getElementById("input1").value + document.getElementById("input2").value + document.getElementById("input3").value
         fetch(url + "?path=Sheet3&action=write&Users=" + name)
         fetch(url + "?path=Sheet2&action=write&Users=1")
+        document.getElementById("container" + dbData.data.length).style.display = "block"
         let div1 = document.createElement("test")
         div1.innerHTML = name
         document.getElementById(dbData.data.length).appendChild(div1)
@@ -179,11 +181,6 @@ function comment2(dbData) {
         document.getElementById(dbData.data.length).appendChild(div2)
     }
     awaiting = false
-}
-function comment3(dbData) { // usesless?
-    let div = document.createElement("test")
-    div.innerHTML = dbData.data[dbData.data.length - 1].Users
-    document.getElementById(dbData.data.length).appendChild(div)
 }
 function update(id, positive) {
     if(!awaiting) {
@@ -210,7 +207,7 @@ function update2(dbData, id, positive) {
     } else {
         fetch(url + "?path=Sheet2&action=remove&number=" + id)
         fetch(url + "?path=Sheet3&action=remove&number=" + id)
-        document.getElementById(id - 2).innerHTML = ""
+        document.getElementById("container" + id).style.display = "none"
     }
     awating = false
 }
@@ -226,6 +223,7 @@ function reset() {
     width: 100%;
     max-width: 200px;
     margin: auto;
+    display: none;
     }
 
     .container img {
@@ -241,15 +239,15 @@ function reset() {
     }
 
     .container #minus {
-        left: 70%;
+        left: 80%;
     }
 
     .container #plus {
-        left: 30%;
+        left: 20%;
     }
 
     .container h2 {
-        top: 70%;
+        top: 80%;
         left: 50%;
         position: absolute;
         transform: translate(-50%, -50%);
