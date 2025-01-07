@@ -193,8 +193,10 @@ function update(id, positive) {
 }
 function update2(dbData, idPage, positive) {
     var newValue = dbData.data[idPage].Users
+    var id = idPage
+    id++
+    id++
     positive ? newValue++ : newValue--
-    id = idPage + 2
     if(newValue > 0) {
         fetch(url + "?path=Sheet2&action=update&Users=" + newValue + "&number=" + id)
         reset()
