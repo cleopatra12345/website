@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <body onload="onLoad()">
-    <h1>welcome to the room</h1>
+    <h1>bienvenu.e dans le salon</h1>
+    <h3>places disponibles: </h3>
     <form>
         <select id="input1">
             <option value="A">A</option>
@@ -220,6 +221,22 @@ function setAwaiting(state) {
 }
 </script>
 <style>
+    h1 {
+        text-align: center;
+        font-family: sans-serif;
+        color: white;
+        font-weight: 1000;
+    }
+    h3 {
+        text-align: center;
+        font-family: sans-serif;
+        color: white;
+        font-weight: 1000;
+    }
+    body {
+        background-image: url("background.jpg");
+    }
+
     .container {
     position: relative;
     width: 100%;
@@ -227,27 +244,22 @@ function setAwaiting(state) {
     margin: auto;
     display: none;
     }
-
     .container img {
     width: 100%;
     height: auto;
     }
-
     .container button {
         top: 90%;
         position: absolute;
         transform: translate(-50%, -50%);
         -ms-transform: translate(-50%, -50%);
     }
-
     .container #minus {
         left: 80%;
     }
-
     .container #plus {
         left: 20%;
     }
-
     .container h2 {
         top: 80%;
         left: 50%;
