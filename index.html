@@ -2,7 +2,7 @@
 <html>
 <body onload="onLoad()">
     <h1>bienvenu dans le salon</h1>
-    <h3>places disponibles: </h3>
+    <h3>places disponibles: </h3><h3 id="spaceInRoom"></h3>
     <div id="createButtons">
     <form>
         <select id="input1">
@@ -152,6 +152,7 @@ function onLoad() {
     .then(data => onLoad2(data))
 }
 function onLoad2(dbData) {
+    document.getElementById("spaceInRoom").innerHTML = 9 - dbData.data.length
     for(let i = 0; i < dbData.data.length; i++) {
         document.getElementById("container" + i).style.display = "block"
         let div = document.createElement("test")
