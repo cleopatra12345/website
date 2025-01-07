@@ -3,6 +3,7 @@
 <body onload="onLoad()">
     <h1>bienvenu.e dans le salon</h1>
     <h3>places disponibles: </h3>
+    <div id="createButtons">
     <form>
         <select id="input1">
             <option value="A">A</option>
@@ -90,6 +91,7 @@
         </select>
     </form>
     <button onclick="createChar()">create</button>
+    </div>
     <div id="container0" class="container">
         <img id="img0" src="bear.png">
         <h2 id="0"></h2>
@@ -237,6 +239,13 @@ function setAwaiting(state) {
     }
     body {
         background-image: url("background.jpg");
+    }
+    #createButtons {
+        position: relative;
+        width: 100%;
+        max-width: 200px;
+        margin: auto;
+        text-align: center;
     }
 
     .container {
