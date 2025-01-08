@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html>
 <body onload="onLoad()">
-    <h1>bienvenu dans le salon</h1>
-    <h3>places disponibles: </h3><h3 id="spaceInRoom"></h3>
+    <h1>welcome to the fridge</h1>
+    <h3 id="spaceInRoom">empty spots in the carton :</h3>
+    <div class="addEgg">
+        <button onclick="add()">add egg</button>
+    </div>
     <div id="createButtons">
     <form>
         <select id="input1">
@@ -94,48 +97,75 @@
     </div>
     <div id="container0" class="container">
         <img id="img0" src="bear.png">
-        <h2 id="0"></h2>
+        <h2 id="name0"></h2>
+        <h4 id="num0"></h4>
         <button id="plus" onclick="update('0', true)">+</button><button id="minus" onclick="update('0', false)">-</button>
     </div>
     <div id="container1" class="container">
         <img src="bear.png">
-        <h2 id="1"></h2>
+        <h2 id="name1"></h2>
+        <h4 id="num1"></h4>
         <button id="plus" onclick="update('1', true)">+</button><button id="minus" onclick="update('1', false)">-</button>
     </div>
     <div id="container2" class="container">
         <img src="bear.png">
-        <h2 id="2"></h2>
+        <h2 id="name2"></h2>
+        <h4 id="num2"></h4>
         <button id="plus" onclick="update('2', true)">+</button><button id="minus" onclick="update('2', false)">-</button>
     </div>
     <div id="container3" class="container">
         <img src="bear.png">
-        <h2 id="3"></h2>
+        <h2 id="name3"></h2>
+        <h4 id="num3"></h4>
         <button id="plus" onclick="update('3', true)">+</button><button id="minus" onclick="update('3', false)">-</button>
     </div>
     <div id="container4" class="container">
         <img src="bear.png">
-        <h2 id="4"></h2>
+        <h2 id="name4"></h2>
+        <h4 id="num4"></h4>
         <button id="plus" onclick="update('4', true)">+</button><button id="minus" onclick="update('4', false)">-</button>
     </div>
     <div id="container5" class="container">
         <img src="bear.png">
-        <h2 id="5"></h2>
+        <h2 id="name5"></h2>
+        <h4 id="num5"></h4>
         <button id="plus" onclick="update('5', true)">+</button><button id="minus" onclick="update('5', false)">-</button>
     </div>
     <div id="container6" class="container">
         <img src="bear.png">
-        <h2 id="6"></h2>
+        <h2 id="name6"></h2>
+        <h4 id="num6"></h4>
         <button id="plus" onclick="update('6', true)">+</button><button id="minus" onclick="update('6', false)">-</button>
     </div>
     <div id="container7" class="container">
         <img src="bear.png">
-        <h2 id="7"></h2>
+        <h2 id="name7"></h2>
+        <h4 id="num7"></h4>
         <button id="plus" onclick="update('7', true)">+</button><button id="minus" onclick="update('7', false)">-</button>
     </div>
     <div id="container8" class="container">
         <img src="bear.png">
-        <h2 id="8"></h2>
+        <h2 id="name8"></h2>
+        <h4 id="num8"></h4>
         <button id="plus" onclick="update('8', true)">+</button><button id="minus" onclick="update('8', false)">-</button>
+    </div>
+    <div id="container9" class="container">
+        <img id="img9" src="bear.png">
+        <h2 id="name9"></h2>
+        <h4 id="num9"></h4>
+        <button id="plus" onclick="update('9', true)">+</button><button id="minus" onclick="update('9', false)">-</button>
+    </div>
+    <div id="container10" class="container">
+        <img id="img10" src="bear.png">
+        <h2 id="name10"></h2>
+        <h4 id="num10"></h4>
+        <button id="plus" onclick="update('10', true)">+</button><button id="minus" onclick="update('10', false)">-</button>
+    </div>
+    <div id="container11" class="container">
+        <img id="img11" src="bear.png">
+        <h2 id="name11"></h2>
+        <h4 id="num11"></h4>
+        <button id="plus" onclick="update('11', true)">+</button><button id="minus" onclick="update('11', false)">-</button>
     </div>
 </body>
 </html>
@@ -143,23 +173,36 @@
 var awaiting = false
 var url = "https://script.google.com/macros/s/AKfycbxQZdFDFr2kNzccXzG_ZZJWY9dqVJoqrtxVx-KkDBQjm6DQAui8d365oNuilqpE80xhaA/exec"
 function onLoad() {
+    document.getElementById("createButtons").style.display = "none"
     setAwaiting(true)
     fetch(url + "?path=Sheet3&action=read")
     .then(res => res.json())
-    .then(data => onLoad2(data))
+    .then(data => onLoad2(data, 0))
     fetch(url + "?path=Sheet2&action=read")
     .then(res => res.json())
-    .then(data => onLoad2(data))
+    .then(data => onLoad2(data, 1))
 }
-function onLoad2(dbData) {
-    document.getElementById("spaceInRoom").innerHTML = 9 - dbData.data.length
+function onLoad2(dbData, num) {
+    setEmptySpots(dbData.data.length)
     for(let i = 0; i < dbData.data.length; i++) {
         document.getElementById("container" + i).style.display = "block"
         let div = document.createElement("test")
-        div.innerHTML = dbData.data[i].Users
-        document.getElementById(i).appendChild(div)
+        if(num == 0) {
+            div.innerHTML = dbData.data[i].Users
+            document.getElementById("name" + i).appendChild(div)
+        } else {
+            div.innerHTML = "freshness: " + dbData.data[i].Users
+            document.getElementById("num" + i).appendChild(div)
+        }
     }
     setAwaiting(false)
+}
+function add() {
+    if(document.getElementById("createButtons").style.display == "none") {
+        document.getElementById("createButtons").style.display = "block"
+    } else {
+        document.getElementById("createButtons").style.display = "none"
+    }
 }
 function createChar() {
     if(!awaiting) {
@@ -170,7 +213,7 @@ function createChar() {
     }
 }
 function comment2(dbData) {
-    if(dbData.data.length >= 9) {
+    if(dbData.data.length >= 12) {
         console.log("limit reached")
     } else {
         var name = document.getElementById("input1").value + document.getElementById("input2").value + document.getElementById("input3").value
@@ -179,10 +222,11 @@ function comment2(dbData) {
         document.getElementById("container" + dbData.data.length).style.display = "block"
         let div1 = document.createElement("test")
         div1.innerHTML = name
-        document.getElementById(dbData.data.length).appendChild(div1)
+        document.getElementById("name" + dbData.data.length).appendChild(div1)
         let div2 = document.createElement("test")
-        div2.innerHTML = 1
-        document.getElementById(dbData.data.length).appendChild(div2)
+        div2.innerHTML = "freshness: 1"
+        document.getElementById("num" + dbData.data.length).appendChild(div2)
+        setEmptySpots(dbData.data.length + 1)
     }
     setAwaiting(false)
 }
@@ -202,27 +246,22 @@ function update2(dbData, idPage, positive) {
     positive ? newValue++ : newValue--
     if(newValue > 0) {
         fetch(url + "?path=Sheet2&action=update&Users=" + newValue + "&number=" + id)
-        reset()
-        fetch(url + "?path=Sheet2&action=read")
-        .then(res => res.json())
-        .then(data => onLoad2(data))
-        fetch(url + "?path=Sheet3&action=read")
-        .then(res => res.json())
-        .then(data => onLoad2(data))
+        document.getElementById("num" + idPage).innerHTML = "freshness: " + newValue
     } else {
         fetch(url + "?path=Sheet2&action=remove&number=" + id)
         fetch(url + "?path=Sheet3&action=remove&number=" + id)
+        document.getElementById("name" + idPage).innerHTML = ""
+        document.getElementById("num" + idPage).innerHTML = ""
         document.getElementById("container" + idPage).style.display = "none"
+        setEmptySpots(dbData.data.length - 1)
     }
     setAwaiting(false)
 }
-function reset() {
-    for(let i = 0; i < 9; i++) {
-        document.getElementById(i).innerHTML = ""
-    }
-}
 function setAwaiting(state) {
     awaiting = state
+}
+function setEmptySpots(num) {
+    document.getElementById("spaceInRoom").innerHTML = "empty spots in the carton : " + Number(12 - num) + "/12"
 }
 </script>
 <style>
@@ -248,6 +287,15 @@ function setAwaiting(state) {
         margin: auto;
         text-align: center;
     }
+    .addEgg {
+        position: relative;
+        width: 100%;
+        max-width: 200px;
+        margin: auto;
+    }
+    .addEgg, button {
+        text-align: center;
+    }
 
     .container {
     position: relative;
@@ -267,13 +315,20 @@ function setAwaiting(state) {
         -ms-transform: translate(-50%, -50%);
     }
     .container #minus {
-        left: 80%;
+        left: 95%;
     }
     .container #plus {
-        left: 20%;
+        left: 5%;
     }
     .container h2 {
         top: 80%;
+        left: 50%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+    }
+    .container h4 {
+        top: 90%;
         left: 50%;
         position: absolute;
         transform: translate(-50%, -50%);
