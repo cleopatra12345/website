@@ -270,12 +270,14 @@ function setEmptySpots(num) {
         font-family: sans-serif;
         color: white;
         font-weight: 1000;
+        font-size: 64px;
     }
     h3 {
         text-align: center;
         font-family: sans-serif;
         color: white;
         font-weight: 1000;
+        font-size: 32px;
     }
     body {
         background-image: url("background.jpg");
@@ -283,9 +285,10 @@ function setEmptySpots(num) {
     #createButtons {
         position: relative;
         width: 100%;
-        max-width: 200px;
+        max-width: 800px;
         margin: auto;
         text-align: center;
+        display: none;
     }
     .addEgg {
         position: relative;
@@ -300,7 +303,7 @@ function setEmptySpots(num) {
     .container {
     position: relative;
     width: 100%;
-    max-width: 200px;
+    max-width: 800px;
     margin: auto;
     display: none;
     }
@@ -315,22 +318,30 @@ function setEmptySpots(num) {
         -ms-transform: translate(-50%, -50%);
     }
     .container #minus {
-        left: 95%;
+        left: 75%;
+        width: 50px;
     }
     .container #plus {
-        left: 5%;
+        left: 25%;
+        width: 50px;
     }
     .container h2 {
-        top: 80%;
+        top: 85%;
         left: 50%;
+        color: white;
         position: absolute;
+        font-size: 32px;
+        font-family: sans-serif;
         transform: translate(-50%, -50%);
         -ms-transform: translate(-50%, -50%);
     }
     .container h4 {
         top: 90%;
         left: 50%;
+        color: white;
         position: absolute;
+        font-size: 28px;
+        font-family: sans-serif;
         transform: translate(-50%, -50%);
         -ms-transform: translate(-50%, -50%);
     }
@@ -341,7 +352,7 @@ function setEmptySpots(num) {
         cursor: pointer;
         display: inline-block;
         font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
-        font-size: 14px;
+        font-size: 28px;
         font-weight: 500;
         line-height: 20px;
         list-style: none;
