@@ -232,6 +232,7 @@ function comment2(dbData) {
 }
 function update(id, positive) {
     if(!awaiting) {
+        document.getElementById("img" + id).style.opacity = 0.5
         setAwaiting(true)
         fetch(url + "?path=Sheet2&action=read")
         .then(res => res.json())
@@ -255,6 +256,7 @@ function update2(dbData, idPage, positive) {
         document.getElementById("container" + idPage).style.display = "none"
         setEmptySpots(dbData.data.length - 1)
     }
+    document.getElementById("img" + idPage).style.opacity = 1
     setAwaiting(false)
 }
 function setAwaiting(state) {
