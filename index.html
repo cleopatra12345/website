@@ -102,49 +102,49 @@
         <button id="plus" onclick="update('0', true)">+</button><button id="minus" onclick="update('0', false)">-</button>
     </div>
     <div id="container1" class="container">
-        <img src="bear.png">
+        <img id="img1" src="bear.png">
         <h2 id="name1"></h2>
         <h4 id="num1"></h4>
         <button id="plus" onclick="update('1', true)">+</button><button id="minus" onclick="update('1', false)">-</button>
     </div>
     <div id="container2" class="container">
-        <img src="bear.png">
+        <img id="img2" src="bear.png">
         <h2 id="name2"></h2>
         <h4 id="num2"></h4>
         <button id="plus" onclick="update('2', true)">+</button><button id="minus" onclick="update('2', false)">-</button>
     </div>
     <div id="container3" class="container">
-        <img src="bear.png">
+        <img id="img3" src="bear.png">
         <h2 id="name3"></h2>
         <h4 id="num3"></h4>
         <button id="plus" onclick="update('3', true)">+</button><button id="minus" onclick="update('3', false)">-</button>
     </div>
     <div id="container4" class="container">
-        <img src="bear.png">
+        <img id="img4" src="bear.png">
         <h2 id="name4"></h2>
         <h4 id="num4"></h4>
         <button id="plus" onclick="update('4', true)">+</button><button id="minus" onclick="update('4', false)">-</button>
     </div>
     <div id="container5" class="container">
-        <img src="bear.png">
+        <img id="img5" src="bear.png">
         <h2 id="name5"></h2>
         <h4 id="num5"></h4>
         <button id="plus" onclick="update('5', true)">+</button><button id="minus" onclick="update('5', false)">-</button>
     </div>
     <div id="container6" class="container">
-        <img src="bear.png">
+        <img id="img6" src="bear.png">
         <h2 id="name6"></h2>
         <h4 id="num6"></h4>
         <button id="plus" onclick="update('6', true)">+</button><button id="minus" onclick="update('6', false)">-</button>
     </div>
     <div id="container7" class="container">
-        <img src="bear.png">
+        <img id="img7" src="bear.png">
         <h2 id="name7"></h2>
         <h4 id="num7"></h4>
         <button id="plus" onclick="update('7', true)">+</button><button id="minus" onclick="update('7', false)">-</button>
     </div>
     <div id="container8" class="container">
-        <img src="bear.png">
+        <img id="img8" src="bear.png">
         <h2 id="name8"></h2>
         <h4 id="num8"></h4>
         <button id="plus" onclick="update('8', true)">+</button><button id="minus" onclick="update('8', false)">-</button>
@@ -170,6 +170,7 @@
 </body>
 </html>
 <script>
+//bug if you remove a char and then create when right after, the last char will have two names and freshness
 var awaiting = false
 var url = "https://script.google.com/macros/s/AKfycbxQZdFDFr2kNzccXzG_ZZJWY9dqVJoqrtxVx-KkDBQjm6DQAui8d365oNuilqpE80xhaA/exec"
 function onLoad() {
