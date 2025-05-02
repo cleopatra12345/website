@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<body onload="onLoad()">
+    <h1>welcome to the fridge</h1>
+    <h3 id="spaceInRoom">empty spots in the carton :</h3>
+    <div class="addEgg">
+        <button onclick="add()">add egg</button>
+    </div>
+    <div id="createButtons">
+    <form>
+        <select id="input1">
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+            <option value="F">F</option>
+            <option value="G">G</option>
+            <option value="H">H</option>
+            <option value="I">I</option>
+            <option value="J">J</option>
+            <option value="K">K</option>
+            <option value="L">L</option>
+            <option value="M">M</option>
+            <option value="N">N</option>
+            <option value="O">O</option>
+            <option value="P">P</option>
+            <option value="Q">Q</option>
+            <option value="R">R</option>
+            <option value="S">S</option>
+            <option value="T">T</option>
+            <option value="U">U</option>
+            <option value="V">V</option>
+            <option value="W">W</option>
+            <option value="X">X</option>
+            <option value="Y">Y</option>
+            <option value="Z">Z</option>
+        </select>
+        <select id="input2">
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+            <option value="F">F</option>
+            <option value="G">G</option>
+            <option value="H">H</option>
+            <option value="I">I</option>
+            <option value="J">J</option>
+            <option value="K">K</option>
+            <option value="L">L</option>
+            <option value="M">M</option>
+            <option value="N">N</option>
+            <option value="O">O</option>
+            <option value="P">P</option>
+            <option value="Q">Q</option>
+            <option value="R">R</option>
+            <option value="S">S</option>
+            <option value="T">T</option>
+            <option value="U">U</option>
+            <option value="V">V</option>
+            <option value="W">W</option>
+            <option value="X">X</option>
+            <option value="Y">Y</option>
+            <option value="Z">Z</option>
+        </select>
+        <select id="input3">
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+            <option value="F">F</option>
+            <option value="G">G</option>
+            <option value="H">H</option>
+            <option value="I">I</option>
+            <option value="J">J</option>
+            <option value="K">K</option>
+            <option value="L">L</option>
+            <option value="M">M</option>
+            <option value="N">N</option>
+            <option value="O">O</option>
+            <option value="P">P</option>
+            <option value="Q">Q</option>
+            <option value="R">R</option>
+            <option value="S">S</option>
+            <option value="T">T</option>
+            <option value="U">U</option>
+            <option value="V">V</option>
+            <option value="W">W</option>
+            <option value="X">X</option>
+            <option value="Y">Y</option>
+            <option value="Z">Z</option>
+        </select>
+    </form>
+    <button onclick="createChar()">create</button>
+    </div>
+    <div id="container0" class="container">
+        <img id="img0" src="bear.png">
+        <h2 id="name0"></h2>
+        <h4 id="num0"></h4>
+        <button id="plus" onclick="update('0', true)">+</button><button id="minus" onclick="update('0', false)">-</button>
+    </div>
+    <div id="container1" class="container">
+        <img id="img1" src="bear.png">
+        <h2 id="name1"></h2>
+        <h4 id="num1"></h4>
+        <button id="plus" onclick="update('1', true)">+</button><button id="minus" onclick="update('1', false)">-</button>
+    </div>
+    <div id="container2" class="container">
+        <img id="img2" src="bear.png">
+        <h2 id="name2"></h2>
+        <h4 id="num2"></h4>
+        <button id="plus" onclick="update('2', true)">+</button><button id="minus" onclick="update('2', false)">-</button>
+    </div>
+    <div id="container3" class="container">
+        <img id="img3" src="bear.png">
+        <h2 id="name3"></h2>
+        <h4 id="num3"></h4>
+        <button id="plus" onclick="update('3', true)">+</button><button id="minus" onclick="update('3', false)">-</button>
+    </div>
+    <div id="container4" class="container">
+        <img id="img4" src="bear.png">
+        <h2 id="name4"></h2>
+        <h4 id="num4"></h4>
+        <button id="plus" onclick="update('4', true)">+</button><button id="minus" onclick="update('4', false)">-</button>
+    </div>
+    <div id="container5" class="container">
+        <img id="img5" src="bear.png">
+        <h2 id="name5"></h2>
+        <h4 id="num5"></h4>
+        <button id="plus" onclick="update('5', true)">+</button><button id="minus" onclick="update('5', false)">-</button>
+    </div>
+    <div id="container6" class="container">
+        <img id="img6" src="bear.png">
+        <h2 id="name6"></h2>
+        <h4 id="num6"></h4>
+        <button id="plus" onclick="update('6', true)">+</button><button id="minus" onclick="update('6', false)">-</button>
+    </div>
+    <div id="container7" class="container">
+        <img id="img7" src="bear.png">
+        <h2 id="name7"></h2>
+        <h4 id="num7"></h4>
+        <button id="plus" onclick="update('7', true)">+</button><button id="minus" onclick="update('7', false)">-</button>
+    </div>
+    <div id="container8" class="container">
+        <img id="img8" src="bear.png">
+        <h2 id="name8"></h2>
+        <h4 id="num8"></h4>
+        <button id="plus" onclick="update('8', true)">+</button><button id="minus" onclick="update('8', false)">-</button>
+    </div>
+    <div id="container9" class="container">
+        <img id="img9" src="bear.png">
+        <h2 id="name9"></h2>
+        <h4 id="num9"></h4>
+        <button id="plus" onclick="update('9', true)">+</button><button id="minus" onclick="update('9', false)">-</button>
+    </div>
+    <div id="container10" class="container">
+        <img id="img10" src="bear.png">
+        <h2 id="name10"></h2>
+        <h4 id="num10"></h4>
+        <button id="plus" onclick="update('10', true)">+</button><button id="minus" onclick="update('10', false)">-</button>
+    </div>
+    <div id="container11" class="container">
+        <img id="img11" src="bear.png">
+        <h2 id="name11"></h2>
+        <h4 id="num11"></h4>
+        <button id="plus" onclick="update('11', true)">+</button><button id="minus" onclick="update('11', false)">-</button>
+    </div>
+</body>
+</html>
+<script>
+//bug if you remove a char and then create when right after, the last char will have two names and freshness
+var awaiting = false
+var url = "https://script.google.com/macros/s/AKfycbxQZdFDFr2kNzccXzG_ZZJWY9dqVJoqrtxVx-KkDBQjm6DQAui8d365oNuilqpE80xhaA/exec"
+function onLoad() {
+    document.getElementById("createButtons").style.display = "none"
+    setAwaiting(true)
+    fetch(url + "?path=Sheet3&action=read")
+    .then(res => res.json())
+    .then(data => onLoad2(data, 0))
+    fetch(url + "?path=Sheet2&action=read")
+    .then(res => res.json())
+    .then(data => onLoad2(data, 1))
+}
+function onLoad2(dbData, num) {
+    setEmptySpots(dbData.data.length)
+    for(let i = 0; i < dbData.data.length; i++) {
+        document.getElementById("container" + i).style.display = "block"
+        let div = document.createElement("test")
+        if(num == 0) {
+            div.innerHTML = dbData.data[i].Users
+            document.getElementById("name" + i).appendChild(div)
+        } else {
+            div.innerHTML = "freshness: " + dbData.data[i].Users
+            document.getElementById("num" + i).appendChild(div)
+        }
+    }
+    setAwaiting(false)
+}
+function add() {
+    if(document.getElementById("createButtons").style.display == "none") {
+        document.getElementById("createButtons").style.display = "block"
+    } else {
+        document.getElementById("createButtons").style.display = "none"
+    }
+}
+function createChar() {
+    if(!awaiting) {
+        setAwaiting(true)
+        fetch(url + "?path=Sheet3&action=read")
+        .then(res => res.json())
+        .then(data => comment2(data))
+    }
+}
+function comment2(dbData) {
+    if(dbData.data.length >= 12) {
+        console.log("limit reached")
+    } else {
+        var name = document.getElementById("input1").value + document.getElementById("input2").value + document.getElementById("input3").value
+        fetch(url + "?path=Sheet3&action=write&Users=" + name)
+        fetch(url + "?path=Sheet2&action=write&Users=1")
+        document.getElementById("container" + dbData.data.length).style.display = "block"
+        let div1 = document.createElement("test")
+        div1.innerHTML = name
+        document.getElementById("name" + dbData.data.length).appendChild(div1)
+        let div2 = document.createElement("test")
+        div2.innerHTML = "freshness: 1"
+        document.getElementById("num" + dbData.data.length).appendChild(div2)
+        setEmptySpots(dbData.data.length + 1)
+    }
+    setAwaiting(false)
+}
+function update(id, positive) {
+    if(!awaiting) {
+        document.getElementById("img" + id).style.opacity = 0.5
+        setAwaiting(true)
+        fetch(url + "?path=Sheet2&action=read")
+        .then(res => res.json())
+        .then(data => update2(data, id, positive))
+    }
+}
+function update2(dbData, idPage, positive) {
+    var newValue = dbData.data[idPage].Users
+    var id = idPage
+    id++
+    id++
+    positive ? newValue++ : newValue--
+    if(newValue > 0) {
+        fetch(url + "?path=Sheet2&action=update&Users=" + newValue + "&number=" + id)
+        document.getElementById("num" + idPage).innerHTML = "freshness: " + newValue
+    } else {
+        fetch(url + "?path=Sheet2&action=remove&number=" + id)
+        fetch(url + "?path=Sheet3&action=remove&number=" + id)
+        document.getElementById("name" + idPage).innerHTML = ""
+        document.getElementById("num" + idPage).innerHTML = ""
+        document.getElementById("container" + idPage).style.display = "none"
+        setEmptySpots(dbData.data.length - 1)
+    }
+    document.getElementById("img" + idPage).style.opacity = 1
+    setAwaiting(false)
+}
+function setAwaiting(state) {
+    awaiting = state
+}
+function setEmptySpots(num) {
+    document.getElementById("spaceInRoom").innerHTML = "empty spots in the carton : " + Number(12 - num) + "/12"
+}
+</script>
+<style>
+    h1 {
+        text-align: center;
+        font-family: sans-serif;
+        color: white;
+        font-weight: 1000;
+        font-size: 64px;
+    }
+    h3 {
+        text-align: center;
+        font-family: sans-serif;
+        color: white;
+        font-weight: 1000;
+        font-size: 32px;
+    }
+    body {
+        background-image: url("background.jpg");
+    }
+    #createButtons {
+        position: relative;
+        width: 100%;
+        max-width: 800px;
+        margin: auto;
+        text-align: center;
+        display: none;
+    }
+    .addEgg {
+        position: relative;
+        width: 100%;
+        max-width: 200px;
+        margin: auto;
+    }
+    .addEgg, button {
+        text-align: center;
+    }
+
+    .container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    display: none;
+    }
+    .container img {
+    width: 100%;
+    height: auto;
+    }
+    .container button {
+        top: 90%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+    }
+    .container #minus {
+        left: 75%;
+        width: 50px;
+    }
+    .container #plus {
+        left: 25%;
+        width: 50px;
+    }
+    .container h2 {
+        top: 85%;
+        left: 50%;
+        color: white;
+        position: absolute;
+        font-size: 32px;
+        font-family: sans-serif;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+    }
+    .container h4 {
+        top: 90%;
+        left: 50%;
+        color: white;
+        position: absolute;
+        font-size: 28px;
+        font-family: sans-serif;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+    }
+
+    button, select {
+        border-radius: 8px;
+        border-width: 0;
+        cursor: pointer;
+        display: inline-block;
+        font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 28px;
+        font-weight: 500;
+        line-height: 20px;
+        list-style: none;
+        margin: 0;
+        padding: 10px 12px;
+        margin: 4px 4px;
+        text-align: center;
+        transition: all 200ms;
+        vertical-align: baseline;
+        white-space: nowrap;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+</style>
