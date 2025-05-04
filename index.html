@@ -12,17 +12,22 @@
 <script>
 var url = "https://script.google.com/macros/s/AKfycbxQZdFDFr2kNzccXzG_ZZJWY9dqVJoqrtxVx-KkDBQjm6DQAui8d365oNuilqpE80xhaA/exec"
 var locations = [
-    ["Tree", "Bush", "Stump", "Nest", "Bear", "Creek"],
+    ["Tree", "Bush", "Stump", "Nest", "Spider Web", "Creek"],
     ["House", "Street","Lamp","Town Hall", "Store", "Library"],
-    ["Summit", "Cave", "Waterfall", "Ravine", "Boulder", "Bridge"],
-    ["Boat", "Dock", "Beach", "Fish Market", "Surf Shack"],
-    ["Catus", "Dune"],
-    ["Hut", "Outhouse"]
+    ["Summit", "Cave", "Waterfall", "Ravine", "Mine", "Bridge"],
+    ["Boat", "Dock", "Beach", "Fish Market", "Surf Shack", "Coral Reef"],
+    ["Catus", "Dune", "Tomb", "Canyon", "Oasis", "Tumble Weed"],
+    ["Hut", "Outhouse", "Dam", "Mud", "Mangrove", "Stinkhole"]
 ]
+var level = 0
 function navigate(num) {
-    for (let i = 0; i < 6; i++) {
-        document.getElementById(i).innerHTML = locations[num][i]
+    if(level == 0) {
+        for (let i = 0; i < 6; i++) {
+            document.getElementById(i).innerHTML = locations[num][i]
+        }
+        level = 1
     }
+    else { location.reload() }
 }
 </script>
 <style>
