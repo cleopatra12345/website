@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html>
 <body>
+<div class="headerClass">
+    <button>back</button>
+    <button>Boogie</button>
+    <button>Hot Foot</button>
+    <button>Simba</button>
+</div>
 <div>
     <button style="background: url(0.png)" id="0" onclick="navigate('0')">Forest</button>
     <button style="background: url(1.png)" id="1" onclick="navigate('1')">Town</button>
@@ -43,5 +49,9 @@ function navigate(num) {
     button {
         height: 128px;
         width: 128px;
+    }
+    headerClass.button {
+        height: 64px;
+        width: 64px;
     }
 </style>
