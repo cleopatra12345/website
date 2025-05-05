@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <body>
-    <button style="background: url(bear.png); background-size: cover;" id="0" onclick="navigate('0')">Forest</button>
-    <button id="1" onclick="navigate('1')">Town</button>
-    <button id="2" onclick="navigate('2')">Mountain</button>
-    <button id="3" onclick="navigate('3')">Sea</button>
-    <button id="4" onclick="navigate('4')">Desert</button>
-    <button id="5" onclick="navigate('5')">Swamp</button>
+    <button style="background: url(0.png)" id="0" onclick="navigate('0')">Forest</button>
+    <button style="background: url(1.png)" id="1" onclick="navigate('1')">Town</button>
+    <button style="background: url(2.png)" id="2" onclick="navigate('2')">Mountain</button>
+    <button style="background: url(3.png)" id="3" onclick="navigate('3')">Sea</button>
+    <button style="background: url(4.png)" id="4" onclick="navigate('4')">Desert</button>
+    <button style="background: url(5.png)" id="5" onclick="navigate('5')">Swamp</button>
 </body>
 </html>
 <script>
@@ -31,5 +31,7 @@ function navigate(num) {
 }
 </script>
 <style>
-    
+    button {
+        size: 128px 128px;
+    }
 </style>
