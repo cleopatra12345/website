@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<body>
+<body onload="onLoad()">
 <div>
     <button onclick="back()">back</button>
     <button>Boogie</button>
@@ -34,6 +34,7 @@ var locations = [
     ["Catus", "Dune", "Tomb", "Canyon", "Oasis", "Tumble Weed"],
     ["Hut", "Outhouse", "Dam", "Mud", "Mangrove", "Stink Hole"]
 ]
+var hidingSpots = [0,0,0]
 var level = 0
 function navigate(num) {
     if(level == 0) {
@@ -46,6 +47,15 @@ function navigate(num) {
 function back() {
     location.reload()
 }
+function onLoad() {
+    fetch(url + "?path=Sheet1&action=read")
+    .then(res => res.json())
+    .then(data => onLoad2(data))
+}
+function onLoad2(dbData, num) {
+    for(let i = 0; i < dbData.data.length; i++) {
+        hidingSpots[i] = dbData.data[i].Users
+    }
 </script>
 <style>
     button {
