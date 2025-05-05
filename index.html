@@ -2,7 +2,7 @@
 <html>
 <body>
 <div class="headerClass">
-    <button>back</button>
+    <button onclick="back()">back</button>
     <button>Boogie</button>
     <button>Hot Foot</button>
     <button>Simba</button>
@@ -42,7 +42,9 @@ function navigate(num) {
         }
         level = 1
     }
-    else { location.reload() }
+}
+function back() {
+    location.reload()
 }
 </script>
 <style>
@@ -50,7 +52,7 @@ function navigate(num) {
         height: 128px;
         width: 128px;
     }
-    headerClass.button {
+    button.headerClass {
         height: 64px;
         width: 64px;
     }
