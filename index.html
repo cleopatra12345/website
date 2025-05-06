@@ -69,6 +69,7 @@ function navigate(num) {
 function hide(id) {
     if(level == 2) {
         write(locationString(), id)
+        document.getElementFromId(names[id]).innerHTML = "HIDING"
     }
 }
 
