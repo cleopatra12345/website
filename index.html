@@ -1,31 +1,30 @@
 <!DOCTYPE html>
 <html>
-<body onload="onLoad()">
+<body onload="read('onLoad')">
 <div>
-    <button onclick="back()">back</button>
-    <button>Boogie</button>
-    <button>Hot Foot</button>
-    <button>Simba</button>
+    <button onclick="back()">Home</button>
+    <button id="Simba" onclick="hide(0)"></button>
+    <button id="HotFoot" onclick="hide(1)"></button>
 </div>
 <div>
-    <button style="background: url(0.png)" id="0" onclick="navigate('0')">Forest</button>
     <button style="background: url(1.png)" id="1" onclick="navigate('1')">Town</button>
     <button style="background: url(2.png)" id="2" onclick="navigate('2')">Mountain</button>
+    <button style="background: url(3.png)" id="3" onclick="navigate('3')">Sea</button>
 </div>
 <div>
-    <button style="background: url(3.png)" id="3" onclick="navigate('3')">Sea</button>
     <button style="background: url(4.png)" id="4" onclick="navigate('4')">Desert</button>
     <button style="background: url(5.png)" id="5" onclick="navigate('5')">Swamp</button>
+    <button style="background: url(6.png)" id="6" onclick="navigate('6')">Swamp</button>
 </div>
 <div>
-    <button style="background: url(6.png)" id="6" onclick="navigate('6')">Swamp</button>
     <button style="background: url(7.png)" id="7" onclick="navigate('7')">Swamp</button>
     <button style="background: url(8.png)" id="8" onclick="navigate('8')">Swamp</button>
+    <button style="background: url(9.png)" id="9" onclick="navigate('9')">Swamp</button>
 </div>
 </body>
 </html>
 <script>
-var url = "https://script.google.com/macros/s/AKfycbxQZdFDFr2kNzccXzG_ZZJWY9dqVJoqrtxVx-KkDBQjm6DQAui8d365oNuilqpE80xhaA/exec"
+var url = "https://script.google.com/macros/s/AKfycbz62Jx0ltf7VPmCfnvHHwyyAABqcVJnTVcNqO6Wv68b7mMGQ7_NJTF4P6MPZIbjkMJrWQ/exec"
 var locations = [
     ["Tree", "Bush", "Stump", "Nest", "Spider Web", "Creek"],
     ["House", "Street","Lamp","Town Hall", "Store", "Library"],
@@ -34,29 +33,76 @@ var locations = [
     ["Catus", "Dune", "Tomb", "Canyon", "Oasis", "Tumble Weed"],
     ["Hut", "Outhouse", "Dam", "Mud", "Mangrove", "Stink Hole"]
 ]
-var hidingSpots = [0,0,0]
+var names = ["Simba", "HotFoot"]
+var avatarLocations = [0,0]
 var level = 0
+var locationId = [0,0]
 function navigate(num) {
     if(level == 0) {
-        for (let i = 0; i < 6; i++) {
+        locationId[0] = num
+        for(let i = 1; i <= 9; i++) {
             document.getElementById(i).innerHTML = locations[num][i]
         }
         level = 1
+    } else if(level == 1) {
+        locationId[1] = num
+        for(let i = 1; i <= 9; i++) {
+            document.getElementById(i).innerHTML = ""
+        }
+        var button = "here: "
+        for(let i = 0; i < avatarLocations.length; i++) {
+            if(avatarLocations[i].toString() == locationString()) {
+                write(0, i)
+                document.getElementById(names[i]).innerHTML = names[i]
+                button += names[i] + " "
+            }
+        }
+        document.getElementById(num).innerHTML = button
+        level = 2
     }
 }
+
+function hide(id) {
+    if(level == 2) {
+        write(locationString(), id)
+    }
+}
+
 function back() {
     location.reload()
 }
-function onLoad() {
-    fetch(url + "?path=Sheet1&action=read")
-    .then(res => res.json())
-    .then(data => onLoad2(data))
-}
-function onLoad2(dbData, num) {
-    for(let i = 0; i < dbData.data.length; i++) {
-        hidingSpots[i] = dbData.data[i].Users
+
+function onLoad(data) {
+    for(let i = 0; i < data.data.length; i++) {
+        avatarLocations[i] = data.data[i].Users
+        if(avatarLocations[i] == 0) {
+            document.getElementById(names[i]).innerHTML = names[i]
+        }
     }
 }
+
+function read(id) {
+    return fetch(url + "?path=Sheet1&action=read")
+    .then(res => res.json())
+    .then(data => readManager(data, id))
+}
+
+function write(location, id) {
+    fetch(url + "?path=Sheet1&action=update&Users=" + location + "&number=" + (id + 2))
+}
+
+function readManager(data, id) {
+    switch(id) {
+        case "onLoad":
+            onLoad(data)
+            break
+    }
+}
+
+function locationString() {
+    return locationId[0].toString() + locationId[1].toString()
+}
+
 </script>
 <style>
     button {
