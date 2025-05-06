@@ -57,6 +57,9 @@ function navigate(num) {
                 document.getElementById(names[i]).innerHTML = names[i]
                 button += names[i] + " "
             }
+            if(avatarLocations[i] == 0) {
+                document.getElementById(names[i]).innerHTML += " hide?"
+            }
         }
         document.getElementById(num).innerHTML = button
         level = 2
@@ -74,7 +77,7 @@ function back() {
 }
 
 function onLoad(data) {
-    for(let i = 0; i < data.data.length; i++) {
+    for(let i = 0; i < avatarLocations.length; i++) {
         avatarLocations[i] = data.data[i].Users
         if(avatarLocations[i] == 0) {
             document.getElementById(names[i]).innerHTML = names[i]
