@@ -4,9 +4,9 @@
 <div>
     <button id="home" onclick="back()">&#x2060</button>
     <form>
-    <select>
-        <option>cat</option>
-        <option>dog</option>
+    <select id="avatar">
+        <option value="CAT">CAT</option>
+        <option value ="DOG">DOG</option>
     </select>
     <button onclick="hide()">&#x2060</button>
 </div>
@@ -38,7 +38,7 @@ var locations = [
     ["Catus", "Dune", "Tomb", "Canyon", "Oasis", "Tumble Weed"],
     ["Hut", "Outhouse", "Dam", "Mud", "Mangrove", "Stink Hole"]
 ]
-var names = ["Simba", "HotFoot"]
+var names = ["CAT", "DOG"]
 var avatarLocations = [0,0]
 var level = 0
 var locationId = [0,0]
@@ -71,7 +71,8 @@ function navigate(num) {
     }
 }
 
-function hide(id) {
+function hide() {
+    var id = document.getElementById("avatar").value
     if(level == 2) {
         write(locationString(), id)
         document.getElementById(names[id]).innerHTML = "HIDING"
@@ -117,7 +118,7 @@ function locationString() {
 
 </script>
 <style>
-    button {
+    button, select {
         height: 128px;
         width: 128px;
         border: none;
