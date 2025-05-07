@@ -3,7 +3,7 @@
 <body onload="read('onLoad')">
 <div id="panel">
     <img src="0.png">
-    <select id="avatar">
+    <select id="avatarSelector">
         <option id="selectLabel">CHOOSE</option>
         <option id="CAT" value="CAT">LOADING</option>
         <option id="DOG" value="DOG">LOADING</option>
@@ -12,9 +12,9 @@
     <button onclick="login()">FIND MY ANIMAL</button>
 </div>
 <div>
-    <button id="home" onclick="back()">&#x2060</button>
+    <button id="home" onclick="back()">BACK</button>
     <button id="actionButton" onclick="action()">&#x2060</button>
-    <button></button>
+    <button id="avatar">&#x2060</button>
 </div>
 <div>
     <button style="background: url(0.png)" id="1" onclick="navigate('1')">Town</button>
@@ -48,6 +48,12 @@ var avatarLocations = [0,0]
 var level = 0
 var locationId = [0,0]
 var canHide = false
+
+function newAvatar() {
+    var id = document.querySelector('#avatarSelector').selectedIndex
+    document.getElementById("avatar").innerHTML = names[id]
+    document.getElemengById("panel")
+}
 
 function navigate(choice) {
     if(level == 0) {
@@ -91,7 +97,7 @@ function checkSpot(choice) {
 
 function action() {
     if(canHide) {
-        var id = document.querySelector('#avatar').selectedIndex
+        var id = document.querySelector('#avatarSelector').selectedIndex
         if(level == 2) {
             write(locationString(), id-1)
             document.getElementById("hideButton").innerHTML = "HIDING"
@@ -106,7 +112,6 @@ function back() {
 }
 
 function onLoad(data) {
-    document.getElementById("selectLabel").innerHTML = "CHOOSE"
     for(let i = 0; i < avatarLocations.length; i++) {
         avatarLocations[i] = data.data[i].Users
         if(avatarLocations[i] == 0) {
