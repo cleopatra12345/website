@@ -5,7 +5,7 @@
     <button id="home" onclick="back()">&#x2060</button>
     <button id="hideButton" onclick="hide()">&#x2060</button>
     <select id="avatar">
-        <option>LOADING</option>
+        <option id="selectLabel">LOADING</option>
         <option id="CAT" value="CAT">LOADING</option>
         <option id="DOG" value="DOG">LOADING</option>
     </select>
@@ -85,7 +85,7 @@ function back() {
 }
 
 function onLoad(data) {
-    document.getElementById(0).innerHTML = "CHOOSE"
+    document.getElementById("selectLabel").innerHTML = "CHOOSE"
     for(let i = 1; i <= avatarLocations.length; i++) {
         avatarLocations[i] = data.data[i].Users
         if(avatarLocations[i] == 0) {
