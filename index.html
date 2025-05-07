@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <body onload="read('onLoad')">
-<div class="panel">
-    <img src="0.png">
+<div id="panel0">
+    <img id="panel1" src="0.png">
     <select id="avatarSelector">
         <option id="selectLabel">CHOOSE</option>
         <option id="CAT" value="CAT">LOADING</option>
         <option id="DOG" value="DOG">LOADING</option>
     </select>
-    <button onclick="newAvatar()">NEW ANIMALE</button>
-    <button onclick="login()">FIND MY ANIMAL</button>
+    <button id="panel2" onclick="newAvatar()">NEW ANIMALE</button>
+    <button id="panel3" onclick="login()">FIND MY ANIMAL</button>
 </div>
 <div>
     <button id="home" onclick="back()">BACK</button>
@@ -52,8 +52,10 @@ var canHide = false
 function newAvatar() {
     var id = document.querySelector('#avatarSelector').selectedIndex
     document.getElementById("avatar").innerHTML = names[id]
-    document.getElemengById("panel").style.display = "none"
     document.getElemengById("avatarSelector").style.display = "none"
+    for(let i = 0; i < 3; i++) {
+        document.getElemengById("panel" + i).style.display = "none"
+    }
 }
 
 function login() {
