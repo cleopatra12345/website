@@ -4,13 +4,11 @@
 <div>
     <button id="home" onclick="back()">&#x2060</button>
     <button id="hideButton" onclick="hide()">&#x2060</button>
-</div>
-<form>
     <select id="avatar">
         <option id="CAT" value="CAT">-</option>
         <option id="DOG" value="DOG">-</option>
     </select>
-<form>
+</div>
 <div>
     <button style="background: url(0.png)" id="1" onclick="navigate('1')">Town</button>
     <button style="background: url(0.png)" id="2" onclick="navigate('2')">Mountain</button>
@@ -72,10 +70,10 @@ function navigate(num) {
 }
 
 function hide() {
-    var id = document.getElementById("avatar").value
+    var id = document.querySelector('#avatar').selectedIndex
+    document.getElementById("home").innerHTML = id
     if(level == 2) {
         write(locationString(), id)
-        document.getElementById(names[id]).innerHTML = "HIDING"
     }
 }
 
