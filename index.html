@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html>
 <body onload="read('onLoad')">
-<div id="panel">
-    <img src="0.png">
+<div id="phase1" class="panel">
+    
+    <button onclick="newAvatar()">NEW ANIMALE</button>
+    <button onclick="login()">FIND AN ANIMAL</button>
+</div>
+<div id="phase2" class="panel">
     <select id="avatarSelector">
         <option id="selectLabel">CHOOSE</option>
         <option id="CAT" value="CAT">LOADING</option>
         <option id="DOG" value="DOG">LOADING</option>
     </select>
-    <button onclick="newAvatar()">NEW ANIMALE</button>
-    <button onclick="login()">FIND MY ANIMAL</button>
+    <button onclick="start()">START</button>
 </div>
-<div>
+<div id="phase3">
+<div class="panel">
     <button id="home" onclick="back()">BACK</button>
     <button id="actionButton" onclick="action()">&#x2060</button>
     <button id="avatar">&#x2060</button>
 </div>
-<div>
+<div class="panel">
     <button style="background: url(0.png)" id="1" onclick="navigate('1')">Town</button>
     <button style="background: url(0.png)" id="2" onclick="navigate('2')">Mountain</button>
     <button style="background: url(0.png)" id="3" onclick="navigate('3')">Sea</button>
 </div>
-<div>
+<div class="panel">
     <button style="background: url(0.png)" id="4" onclick="navigate('4')">Desert</button>
     <button style="background: url(0.png)" id="5" onclick="navigate('5')">Swamp</button>
     <button style="background: url(0.png)" id="6" onclick="navigate('6')">&#x2060</button>
 </div>
-<div>
+<div class="panel">
     <button style="background: url(0.png)" id="7" onclick="navigate('7')">&#x2060</button>
     <button style="background: url(0.png)" id="8" onclick="navigate('8')">&#x2060</button>
     <button style="background: url(0.png)" id="9" onclick="navigate('9')">&#x2060</button>
@@ -48,15 +52,27 @@ var avatarLocations = [0,0]
 var level = 0
 var locationId = [0,0]
 var canHide = false
+var selected = false
+var selectedAvatar
 
 function newAvatar() {
-    var id = document.querySelector('#avatarSelector').selectedIndex
-    document.getElementById("avatar").innerHTML = names[id]
-    document.getElemengById("panel").style.display = "none"
+    document.getElementById("phase1").style.display = "none"
+    document.getElementById("phase2").style.display = "block"
+}
+
+function start() {
+    selectedAvatar = document.querySelector('#avatarSelector').selectedIndex - 1
+    if (id != -1 && avatarLocations[selectedAvatar] == 0) {
+        selected = true
+        document.getElementById("avatar").innerHTML = names[selectedAvatar]
+        document.getElementById("phase2").style.display = "none"
+        document.getElementById("phase3").style.display = "block"
+    }
 }
 
 function login() {
-    document.getElemengById("panel").style.display = "none"
+    document.getElementById("phase1").style.display = "none"
+    document.getElementById("phase3").style.display = "block"
 }
 
 function navigate(choice) {
@@ -76,7 +92,6 @@ function changeLevel(destination, choice) {
 }
 
 function checkSpot(choice) {
-    canHide = true
     locationId[1] = choice
     for(let i = 1; i <= 9; i++) {
         document.getElementById(i).innerHTML = "\u2060"
@@ -87,23 +102,30 @@ function checkSpot(choice) {
         if(avatarLocations[i].toString() == locationString()) {
             document.getElementById(names[i]).innerHTML = names[i]
             isEmpty = false
-            hiding = names[i]
+            hiding = i
         }
     }
     if(isEmpty) {
-        document.getElementById(num).innerHTML = "NOTHING HERE"
+        document.getElementById(choice).innerHTML = "NOTHING HERE"
     } else {
-        document.getElementById(num).innerHTML = hiding + " FOUND!!"
+        document.getElementById(choice).innerHTML = names[hiding] + " FOUND!!"
+        write(0, hiding)
+        selected = true
+        selectedAvatar = hiding
+        document.getElementById("avatar").innerHTML = names[hiding]
+    }
+    if(selected) {
+        canHide = true
+        document.getElementById("actionButton").innerHTML = "HIDE"
     }
     level = 2
 }
 
 function action() {
     if(canHide) {
-        var id = document.querySelector('#avatarSelector').selectedIndex
         if(level == 2) {
-            write(locationString(), id-1)
-            document.getElementById("hideButton").innerHTML = "HIDING"
+            write(locationString(), selectedAvatar)
+            document.getElementById("actionButton").innerHTML = "HIDING"
         }
     }
 }
@@ -154,13 +176,12 @@ function locationString() {
         width: 128px;
         border: none;
     }
-    div {
+    .panel {
         height: 128px;
         width: 384px;
         font-size: 0px;
     }
-    .panel {
-        position: absolute;
+    #phase2, #phase3 {
         display: none;
     }
 </style>
