@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
 <body onload="read('onLoad')">
-<div class="panel">
+<div id="panel">
     <img src="0.png">
     <select id="avatar">
         <option id="selectLabel">CHOOSE</option>
         <option id="CAT" value="CAT">LOADING</option>
         <option id="DOG" value="DOG">LOADING</option>
     </select>
-    <button>NEW ANIMALE</button>
-    <button>FIND MY ANIMAL</button>
+    <button onclick="newAvatar()">NEW ANIMALE</button>
+    <button onclick="login()">FIND MY ANIMAL</button>
 </div>
 <div>
     <button id="home" onclick="back()">&#x2060</button>
-    <button id="hideButton" onclick="hide()">&#x2060</button>
+    <button id="actionButton" onclick="action()">&#x2060</button>
     <button></button>
 </div>
 <div>
@@ -49,36 +49,47 @@ var level = 0
 var locationId = [0,0]
 var canHide = false
 
-function navigate(num) {
+function navigate(choice) {
     if(level == 0) {
-        locationId[0] = num
-        for(let i = 1; i <= 9; i++) {
-            document.getElementById(i).innerHTML = locations[num][i]
-        }
-        document.getElementById("home").innerHTML = "HOME"
-        level = 1
+        changeLevel(1, choice)
     } else if(level == 1) {
-        locationId[1] = num
-        for(let i = 1; i <= 9; i++) {
-            document.getElementById(i).innerHTML = "\u2060"
-        }
-        var button = "here: "
-        for(let i = 0; i < avatarLocations.length; i++) {
-            if(avatarLocations[i].toString() == locationString()) {
-                write(0, i)
-                document.getElementById(names[i]).innerHTML = names[i]
-                button += names[i] + " "
-            }
-            if(false) {
-                document.getElementById("hideButton").innerHTML = "hide?"
-            }
-        }
-        document.getElementById(num).innerHTML = button
-        level = 2
+        checkSpot(choice)
     }
 }
 
-function hide() {
+function changeLevel(destination, choice) {
+    locationId[0] = choice
+    for(let i = 1; i <= 9; i++) {
+        document.getElementById(i).innerHTML = locations[choice][1]
+    }
+    level = 1
+}
+
+function checkSpot(choice) {
+    canHide = true
+    locationId[1] = choice
+    for(let i = 1; i <= 9; i++) {
+        document.getElementById(i).innerHTML = "\u2060"
+    }
+    var isEmpty = true
+    var hiding
+    for(let i = 0; i < avatarLocations.length; i++) {
+        if(avatarLocations[i].toString() == locationString()) {
+            write(0, i)
+            document.getElementById(names[i]).innerHTML = names[i]
+            isEmpty = false
+            hiding = names[i]
+        }
+    }
+    if(isEmpty) {
+        document.getElementById(num).innerHTML = "NOTHING HERE"
+    } else {
+        document.getElementById(num).innerHTML = hiding + " FOUND!!"
+    }
+    level = 2
+}
+
+function action() {
     if(canHide) {
         var id = document.querySelector('#avatar').selectedIndex
         if(level == 2) {
@@ -140,9 +151,7 @@ function locationString() {
         width: 384px;
         font-size: 0px;
     }
-    .panel {
+    #panel {
         position: absolute;
-        height: 384px;
-        width: 384px;
     }
 </style>
