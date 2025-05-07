@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <body onload="read('onLoad')">
+<div style="display: none">
+<img src="0.png">
+</div>
 <div>
     <button id="home" onclick="back()">&#x2060</button>
     <button id="hideButton" onclick="hide()">&#x2060</button>
@@ -41,6 +44,8 @@ var names = ["CAT", "DOG"]
 var avatarLocations = [0,0]
 var level = 0
 var locationId = [0,0]
+var canHide = false
+
 function navigate(num) {
     if(level == 0) {
         locationId[0] = num
@@ -61,7 +66,7 @@ function navigate(num) {
                 document.getElementById(names[i]).innerHTML = names[i]
                 button += names[i] + " "
             }
-            if(avatarLocations[i] == 0) {
+            if(false) {
                 document.getElementById("hideButton").innerHTML = "hide?"
             }
         }
@@ -71,10 +76,12 @@ function navigate(num) {
 }
 
 function hide() {
-    var id = document.querySelector('#avatar').selectedIndex
-    if(level == 2) {
-        write(locationString(), id-1)
-        document.getElementById("hideButton").innerHTML = "HIDING"
+    if(canHide) {
+        var id = document.querySelector('#avatar').selectedIndex
+        if(level == 2) {
+            write(locationString(), id-1)
+            document.getElementById("hideButton").innerHTML = "HIDING"
+        }
     }
 }
 
