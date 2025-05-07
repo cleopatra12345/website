@@ -86,7 +86,7 @@ function back() {
 
 function onLoad(data) {
     document.getElementById("selectLabel").innerHTML = "CHOOSE"
-    for(let i = 1; i <= avatarLocations.length; i++) {
+    for(let i = 0; i < avatarLocations.length; i++) {
         avatarLocations[i] = data.data[i].Users
         if(avatarLocations[i] == 0) {
             document.getElementById(names[i]).innerHTML = names[i]
