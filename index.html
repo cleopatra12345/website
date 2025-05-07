@@ -62,7 +62,7 @@ function newAvatar() {
 
 function start() {
     selectedAvatar = document.querySelector('#avatarSelector').selectedIndex - 1
-    if (id != -1 && avatarLocations[selectedAvatar] == 0) {
+    if (selectedAvatar != -1 && avatarLocations[selectedAvatar] == 0) {
         selected = true
         document.getElementById("avatar").innerHTML = names[selectedAvatar]
         document.getElementById("phase2").style.display = "none"
