@@ -3,9 +3,14 @@
 <body onload="read('onLoad')">
 <div>
     <button id="home" onclick="back()">&#x2060</button>
-    <button id="Simba" onclick="hide(0)">&#x2060</button>
-    <button id="HotFoot" onclick="hide(1)">&#x2060</button>
+    <form>
+    <select>
+        <option>cat</option>
+        <option>dog</option>
+    </select>
+    <button onclick="hide()">&#x2060</button>
 </div>
+    </form>
 <div>
     <button style="background: url(0.png)" id="1" onclick="navigate('1')">Town</button>
     <button style="background: url(0.png)" id="2" onclick="navigate('2')">Mountain</button>
