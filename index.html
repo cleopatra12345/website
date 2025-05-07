@@ -2,16 +2,17 @@
 <html>
 <body onload="read('onLoad')">
 <div class="panel">
-<img src="0.png">
-</div>
-<div>
-    <button id="home" onclick="back()">&#x2060</button>
-    <button id="hideButton" onclick="hide()">&#x2060</button>
+    <img src="0.png">
     <select id="avatar">
         <option id="selectLabel">LOADING</option>
         <option id="CAT" value="CAT">LOADING</option>
         <option id="DOG" value="DOG">LOADING</option>
     </select>
+</div>
+<div>
+    <button id="home" onclick="back()">&#x2060</button>
+    <button id="hideButton" onclick="hide()">&#x2060</button>
+    <button></button>
 </div>
 <div>
     <button style="background: url(0.png)" id="1" onclick="navigate('1')">Town</button>
@@ -139,5 +140,7 @@ function locationString() {
     }
     .panel {
         position: absolute;
+        height: 384px;
+        width: 384px;
     }
 </style>
