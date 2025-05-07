@@ -52,7 +52,11 @@ var canHide = false
 function newAvatar() {
     var id = document.querySelector('#avatarSelector').selectedIndex
     document.getElementById("avatar").innerHTML = names[id]
-    document.getElemengById("panel")
+    document.getElemengById("panel").style.display = "none"
+}
+
+function login() {
+    document.getElemengById("panel").style.display = "none"
 }
 
 function navigate(choice) {
@@ -81,7 +85,6 @@ function checkSpot(choice) {
     var hiding
     for(let i = 0; i < avatarLocations.length; i++) {
         if(avatarLocations[i].toString() == locationString()) {
-            write(0, i)
             document.getElementById(names[i]).innerHTML = names[i]
             isEmpty = false
             hiding = names[i]
