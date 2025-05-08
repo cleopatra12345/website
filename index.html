@@ -44,6 +44,8 @@
 </html>
 <script>
 
+//randomize board
+
 var url = "https://script.google.com/macros/s/AKfycbz62Jx0ltf7VPmCfnvHHwyyAABqcVJnTVcNqO6Wv68b7mMGQ7_NJTF4P6MPZIbjkMJrWQ/exec"
 var locationsHome = ["Town", "Mountain", "Sea", "Desert", "Swamp", "a", "a", "a", "a"]
 var locations = [
@@ -151,6 +153,7 @@ function hidden() {
     document.getElementById(locationId[1]).innerHTML = names[selectedAvatar]
     avatarLocations[selectedAvatar] = 0
     selectedAvatar = null
+    isEmpty = true
 }
 
 function found() {
