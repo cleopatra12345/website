@@ -40,7 +40,9 @@
 </html>
 <script>
 
-//remove hide/hiding when going back
+//when logged in and find an animal action=kick out
+//when logged out and find an animal action=select animal
+//when home back=reload
 
 
 var url = "https://script.google.com/macros/s/AKfycbz62Jx0ltf7VPmCfnvHHwyyAABqcVJnTVcNqO6Wv68b7mMGQ7_NJTF4P6MPZIbjkMJrWQ/exec"
@@ -115,7 +117,7 @@ function checkSpot(choice) {
         document.getElementById(choice).innerHTML = "NOTHING HERE"
     } else {
         document.getElementById(choice).innerHTML = names[hiding] + " FOUND!!"
-        write(0, hiding)
+        write(0, hiding, "find")
         selected = true
         selectedAvatar = hiding
         document.getElementById("avatar").innerHTML = names[hiding]
@@ -130,10 +132,20 @@ function checkSpot(choice) {
 function action() {
     if(canHide) {
         if(level == 2) {
-            write(locationString(), selectedAvatar)
+            write(locationString(), selectedAvatar, "hide")
             document.getElementById("actionButton").innerHTML = "HIDING"
         }
     }
+}
+
+function hidden() {
+    document.getElementById("actionButton").innerHTML = "&#x2060"
+    document.getElementById("avatar").innerHTML += " (hidden)"
+    document.getElementById(locationId[1]).innerHTML = names[selectedAvatar]
+}
+
+function found() {
+
 }
 
 function back() {
@@ -165,10 +177,9 @@ function read(id) {
     .then(data => readManager(data, id))
 }
 
-function write(location, id) {
+function write(location, id, action) {
     fetch(url + "?path=Sheet1&action=update&Users=" + location + "&number=" + (id + 2))
-    .then(res => res.json())
-    .then(data => readManager(data, "write"))
+    .then(res => readManager(res, action))
 }
 
 function readManager(data, id) {
@@ -176,8 +187,11 @@ function readManager(data, id) {
         case "onLoad":
             onLoad(data)
             break
-        case "write":
-            location.reload()
+        case "hide":
+            hidden()
+            break
+        case "find":
+            found()
             break
     }
 }
