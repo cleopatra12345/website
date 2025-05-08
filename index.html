@@ -2,11 +2,12 @@
 <html>
 <body onload="read('onLoad')">
 <div id="phase1" class="panel">
-    
+    <button>&#x2060</button>
     <button onclick="newAvatar()">NEW ANIMALE</button>
     <button onclick="login()">FIND AN ANIMAL</button>
 </div>
 <div id="phase2" class="panel">
+    <button onclick="location.reload()">BACK</button>
     <select id="avatarSelector">
         <option id="selectLabel">CHOOSE</option>
         <option id="CAT" value="CAT">LOADING</option>
@@ -38,7 +39,12 @@
 </body>
 </html>
 <script>
+
+//remove hide/hiding when going back
+
+
 var url = "https://script.google.com/macros/s/AKfycbz62Jx0ltf7VPmCfnvHHwyyAABqcVJnTVcNqO6Wv68b7mMGQ7_NJTF4P6MPZIbjkMJrWQ/exec"
+var locationsHome = ["Town", "Mountain", "Sea", "Desert", "Swamp", "a", "a", "a", "a"]
 var locations = [
     ["Tree", "Bush", "Stump", "Nest", "Spider Web", "Creek"],
     ["House", "Street","Lamp","Town Hall", "Store", "Library"],
@@ -62,7 +68,7 @@ function newAvatar() {
 
 function start() {
     selectedAvatar = document.querySelector('#avatarSelector').selectedIndex - 1
-    if (id != -1 && avatarLocations[selectedAvatar] == 0) {
+    if (selectedAvatar != -1 && avatarLocations[selectedAvatar] == 0) {
         selected = true
         document.getElementById("avatar").innerHTML = names[selectedAvatar]
         document.getElementById("phase2").style.display = "none"
@@ -86,9 +92,9 @@ function navigate(choice) {
 function changeLevel(destination, choice) {
     locationId[0] = choice
     for(let i = 1; i <= 9; i++) {
-        document.getElementById(i).innerHTML = locations[choice][1]
+        document.getElementById(i).innerHTML = locations[choice][i]
     }
-    level = 1
+    level = destination
 }
 
 function checkSpot(choice) {
@@ -131,8 +137,14 @@ function action() {
 }
 
 function back() {
-    if(level != 0) {
-        location.reload()
+    if(level == 1) {
+        for(let i = 0; i < 9; i++) {
+            document.getElementById(i+1).innerHTML = locationsHome[i]
+            level = 0
+        }
+    }
+    if(level == 2) {
+        changeLevel(1, locationId[0])
     }
 }
 
