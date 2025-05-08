@@ -167,12 +167,17 @@ function read(id) {
 
 function write(location, id) {
     fetch(url + "?path=Sheet1&action=update&Users=" + location + "&number=" + (id + 2))
+    .then(res => res.json())
+    .then(data => readManager(data, "write"))
 }
 
 function readManager(data, id) {
     switch(id) {
         case "onLoad":
             onLoad(data)
+            break
+        case "write":
+            location.reload()
             break
     }
 }
