@@ -31,14 +31,14 @@
     <button style="background: url(3.png)" id="3" onclick="navigate('3')">Sea</button>
 </div>
 <div class="panel">
-    <button style="background: url(4.png)" id="4" onclick="navigate('4')">Desert</button>
-    <button style="background: url(5.png)" id="5" onclick="navigate('5')">Swamp</button>
-    <button style="background: url(6.png)" id="6" onclick="navigate('6')">&#x2060</button>
+    <button style="background: url(placeHolder.png)" id="4" onclick="navigate('4')">Desert</button>
+    <button style="background: url(placeHolder.png)" id="5" onclick="navigate('5')">Swamp</button>
+    <button style="background: url(placeHolder.png)" id="6" onclick="navigate('6')">&#x2060</button>
 </div>
 <div class="panel">
-    <button style="background: url(7.png)" id="7" onclick="navigate('7')">&#x2060</button>
-    <button style="background: url(8.png)" id="8" onclick="navigate('8')">&#x2060</button>
-    <button style="background: url(9.png)" id="9" onclick="navigate('9')">&#x2060</button>
+    <button style="background: url(placeHolder.png)" id="7" onclick="navigate('7')">&#x2060</button>
+    <button style="background: url(placeHolder.png)" id="8" onclick="navigate('8')">&#x2060</button>
+    <button style="background: url(placeHolder.png)" id="9" onclick="navigate('9')">&#x2060</button>
 </div>
 </body>
 </html>
@@ -86,6 +86,9 @@ function login() {
 function navigate(choice) {
     if(level == 0) {
         changeLevel(1, choice)
+        for(let i = 1; i <= 9; i++) {
+            document.getElementById(i).style.background = "url(placeHolder.png)"
+        }
     } else if(level == 1) {
         checkSpot(choice)
     }
@@ -161,9 +164,10 @@ function back() {
         location.reload()
     }
     if(level == 1) {
-        for(let i = 0; i < 9; i++) {
-            document.getElementById(i+1).innerHTML = locationsHome[i]
+        for(let i = 1; i <= 9; i++) {
+            document.getElementById(i).innerHTML = locationsHome[i-1]
             level = 0
+            document.getElementById(i).style.background = "url(" + (i) + ".png)"
         }
     }
     if(level == 2) {
@@ -223,6 +227,7 @@ function locationString() {
         font-family: Arial, Helvetica, sans-serif;
         font-weight: bold;
         font-size: large;
+        text-align: center;
     }
     .panel {
         height: 320px;
