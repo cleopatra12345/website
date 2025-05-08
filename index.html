@@ -41,8 +41,6 @@
 <script>
 
 //when logged in and find an animal action=kick out
-//when logged out and find an animal action=select animal
-//when home back=reload
 
 
 var url = "https://script.google.com/macros/s/AKfycbz62Jx0ltf7VPmCfnvHHwyyAABqcVJnTVcNqO6Wv68b7mMGQ7_NJTF4P6MPZIbjkMJrWQ/exec"
@@ -60,6 +58,7 @@ var avatarLocations = [0,0]
 var level = 0
 var locationId = [0,0]
 var canHide = false
+var hidden = false
 var selected = false
 var selectedAvatar
 var hiding
@@ -146,7 +145,7 @@ function hidden() {
     document.getElementById("actionButton").innerHTML = "&#x2060"
     document.getElementById("avatar").innerHTML += " (hidden)"
     document.getElementById(locationId[1]).innerHTML = names[selectedAvatar]
-    canHide = false
+    hidden = true
 }
 
 function found() {
