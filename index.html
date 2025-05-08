@@ -11,6 +11,10 @@
     <select id="avatarSelector">
         <option id="selectLabel">CHOOSE</option>
         <option id="CAT" value="CAT">LOADING</option>
+        <option id="BIRD" value="BIRD">LOADING</option>
+        <option id="HAMSTER" value="HAMSTER">LOADING</option>
+        <option id="LIZARD" value="LIZARD">LOADING</option>
+        <option id="SNAKE" value="SNAKE">LOADING</option>
         <option id="DOG" value="DOG">LOADING</option>
     </select>
     <button onclick="start()">START</button>
@@ -54,8 +58,8 @@ var locations = [
     ["Catus", "Dune", "Tomb", "Canyon", "Oasis", "Tumble Weed"],
     ["Hut", "Outhouse", "Dam", "Mud", "Mangrove", "Stink Hole"]
 ]
-var names = ["CAT", "DOG"]
-var avatarLocations = [0,0]
+var names = ["CAT", "BIRD", "HAMSTER", "LIZARD", "SNAKE", "DOG"]
+var avatarLocations = [0,0,0,0,0,0]
 var level = 0
 var locationId = [0,0]
 var canHide = false
