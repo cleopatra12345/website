@@ -61,7 +61,8 @@ var level = 0
 var locationId = [0,0]
 var canHide = false
 var selected = false
-var selectedAvatar
+var selectedAvatar = null
+var hiding = null
 
 function newAvatar() {
     document.getElementById("phase1").style.display = "none"
@@ -105,7 +106,6 @@ function checkSpot(choice) {
         document.getElementById(i).innerHTML = "\u2060"
     }
     var isEmpty = true
-    var hiding
     for(let i = 0; i < avatarLocations.length; i++) {
         if(avatarLocations[i].toString() == locationString()) {
             document.getElementById(names[i]).innerHTML = names[i]
@@ -117,10 +117,9 @@ function checkSpot(choice) {
         document.getElementById(choice).innerHTML = "NOTHING HERE"
     } else {
         document.getElementById(choice).innerHTML = names[hiding] + " FOUND!!"
-        write(0, hiding, "find")
-        selected = true
-        selectedAvatar = hiding
-        document.getElementById("avatar").innerHTML = names[hiding]
+        if(selectedAvatar == null) {
+            document.getElementById("actionButton").innerHTML = "SELECT ANIMAL"
+        }
     }
     if(selected) {
         canHide = true
@@ -135,6 +134,11 @@ function action() {
             write(locationString(), selectedAvatar, "hide")
             document.getElementById("actionButton").innerHTML = "HIDING"
         }
+    } else if(selectedAvatar == null){
+        write(0, , "find")
+        selected = true
+        selectedAvatar = hiding
+        document.getElementById("avatar").innerHTML = names[hiding]
     }
 }
 
@@ -145,10 +149,13 @@ function hidden() {
 }
 
 function found() {
-
+    document.getElementById("actionButton").innerHTML= "&#x2060"
 }
 
 function back() {
+    if(level == 0) {
+        location.reload()
+    }
     if(level == 1) {
         for(let i = 0; i < 9; i++) {
             document.getElementById(i+1).innerHTML = locationsHome[i]
@@ -157,6 +164,7 @@ function back() {
     }
     if(level == 2) {
         changeLevel(1, locationId[0])
+        hiding = null
     }
 }
 
