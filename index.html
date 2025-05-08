@@ -59,7 +59,7 @@ var avatarLocations = [0,0]
 var level = 0
 var locationId = [0,0]
 var canHide = false
-var hidden = false
+var isHidden = false
 var selected = false
 var selectedAvatar
 var hiding
@@ -145,7 +145,7 @@ function hidden() {
     document.getElementById("actionButton").innerHTML = "&#x2060"
     document.getElementById("avatar").innerHTML = names[selectedAvatar] + " (hidden)"
     document.getElementById(locationId[1]).innerHTML = names[selectedAvatar]
-    hidden = true
+    isHidden = true
 }
 
 function found() {
