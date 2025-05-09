@@ -71,17 +71,17 @@ var selectedAvatar = null
 var hiding = null
 
 function newAvatar() {
-    getElmtDisplay("phase1") = "none"
-    getElmtDisplay("phase2") = "block"
+    getElmtDisplay("phase1", "none")
+    getElmtDisplay("phase2", "block")
 }
 
 function start() {
     selectedAvatar = document.querySelector('#avatarSelector').selectedIndex - 1
     if (selectedAvatar != -1 && avatarLocations[selectedAvatar] == 0) {
         selected = true
-        getElmtHTML("avatar") = names[selectedAvatar]
-        getElmtDisplay("phase2") = "none"
-        getElmtDisplay("phase3") = "block"
+        getElmtHTML("avatar", names[selectedAvatar])
+        getElmtDisplay("phase2", "none")
+        getElmtDisplay("phase3", "block")
     }
 }
 
