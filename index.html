@@ -86,8 +86,8 @@ function start() {
 }
 
 function login() {
-    document.getElementById("phase1").style.display = "none"
-    document.getElementById("phase3").style.display = "block"
+    getElmtDisplay("phase1", "none")
+    getElmtDisplay("phase3", "block")
 }
 
 function navigate(choice) {
@@ -104,7 +104,7 @@ function navigate(choice) {
 function changeLevel(destination, choice) {
     locationId[0] = choice
     for(let i = 0; i < 9; i++) {
-        document.getElementById(i+1).innerHTML = locations[choice-1][i]
+        getElmtHTML(i+1, locations[choice-1][i])
     }
     level = destination
 }
@@ -112,12 +112,12 @@ function changeLevel(destination, choice) {
 function checkSpot(choice) {
     locationId[1] = choice
     for(let i = 1; i <= 9; i++) {
-        document.getElementById(i).innerHTML = "\u2060"
+        getElmtHTML(i, "\u2060")
     }
     var isEmpty = true
     for(let i = 0; i < avatarLocations.length; i++) {
         if(avatarLocations[i].toString() == locationString()) {
-            document.getElementById(names[i]).innerHTML = names[i]
+            getElmtHTML(names[i], names[i])
             isEmpty = false
             hiding = i
         }
