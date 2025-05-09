@@ -80,8 +80,8 @@ function start() {
     if (selectedAvatar != -1 && avatarLocations[selectedAvatar] == 0) {
         selected = true
         getElmtHTML("avatar") = names[selectedAvatar]
-        getElmt("phase2").style.display = "none"
-        getElmt("phase3").style.display = "block"
+        getElmtDisplay("phase2") = "none"
+        getElmtDisplay("phase3") = "block"
     }
 }
 
@@ -225,8 +225,8 @@ function locationString() {
     return locationId[0].toString() + locationId[1].toString()
 }
 
-function getElmt(id) {
-    return document.getElementById(id)
+function getElmtDisplay(id) {
+    return document.getElementById(id).style.display
 }
 
 function getElmtHTML(id) {
