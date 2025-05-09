@@ -123,7 +123,7 @@ function checkSpot(choice) {
         }
     }
     if(isEmpty) {
-        document.getElementById(choice).innerHTML = "NOTHING HERE"
+        getElmtHTML(choice, "NOTHING HERE")
     } else {
         document.getElementById(choice).innerHTML = names[hiding] + " FOUND!!"
         if(selectedAvatar == null) {
