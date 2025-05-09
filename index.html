@@ -12,7 +12,7 @@
         <option id="selectLabel">CHOOSE</option>
         <option id="CAT" value="CAT">LOADING</option>
         <option id="BIRD" value="BIRD">LOADING</option>
-        <option id="HAMSTER" value="HAMSTER">LOADING</option>
+        <option id="RAT" value="RAT">LOADING</option>
         <option id="LIZARD" value="LIZARD">LOADING</option>
         <option id="SNAKE" value="SNAKE">LOADING</option>
         <option id="DOG" value="DOG">LOADING</option>
@@ -188,7 +188,7 @@ function onLoad(data) {
     for(let i = 0; i < avatarLocations.length; i++) {
         avatarLocations[i] = data.data[i].Users
         if(avatarLocations[i] == 0) {
-            document.getElementById(names[i]).innerHTML = names[i]
+            document.getElementById(i).innerHTML = names[i]
         } else {
             document.getElementById(names[i]).innerHTML = "HIDDEN"
         }
