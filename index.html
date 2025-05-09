@@ -49,16 +49,19 @@
 //hide option when already hidden
 
 var url = "https://script.google.com/macros/s/AKfycbz62Jx0ltf7VPmCfnvHHwyyAABqcVJnTVcNqO6Wv68b7mMGQ7_NJTF4P6MPZIbjkMJrWQ/exec"
-var locationsHome = ["VILLAGE", "MOUNTAIN", "SEA", "DESERT", "SWAMP", "CITY", "MARKET", "FARM", "INN"]
+var locationsHome = ["TOWN", "MOUNTAIN", "SEA", "DESERT", "FOREST", "SWAMP", "MARKET", "FARM", "INN"]
 var locations = [
-    ["Tree", "Bush", "Stump", "Nest", "Spider Web", "Creek"],
-    ["House", "Street","Lamp","Town Hall", "Store", "Library"],
-    ["Summit", "Cave", "Waterfall", "Ravine", "Mine", "Bridge"],
-    ["Boat", "Dock", "Beach", "Fish Market", "Surf Shack", "Coral Reef"],
-    ["Catus", "Dune", "Tomb", "Canyon", "Oasis", "Tumble Weed"],
-    ["Hut", "Outhouse", "Dam", "Mud", "Mangrove", "Stink Hole"]
+    ["HOUSE", "STREET", "LIGHT", "LYBRARY", "&#x2060", "&#x2060", "&#x2060", "&#x2060", "&#x2060"],
+    ["SUMMIT", "CAVE", "WATERFALL", "RAVINE", "MINE", "BRIDGE", "&#x2060", "&#x2060", "&#x2060"],
+    ["BOAT", "DOCK", "BEACH", "COVE", "SURF SHACK", "CORAL REEF", "&#x2060", "&#x2060", "&#x2060"],
+    ["CACTUS", "DUNE", "TOMB", "CANYON", "OASIS", "TUMBLE WEED", "&#x2060", "&#x2060", "&#x2060"],
+    ["TREE", "SHELTER", "STUMP", "NEST", "SPIDER WEB", "CREEK", "CAMP FIRE", "&#x2060", "&#x2060"],
+    ["HUT", "OUTHOUSE", "DAM", "MUD", "MANGROVE", "STINK HOLE", "CATTAIL", "&#x2060", "&#x2060"],
+    ["FRUIT STALL", "BUTCHER", "MUSICIAN", "COCK FIGHT", "&#x2060", "&#x2060", "&#x2060", "&#x2060", "&#x2060"],
+    ["STABLE", "MILL","COOP","TRACTOR", "SILO", "&#x2060", "&#x2060", "&#x2060", "&#x2060"],
+    ["ROOM", "RECEPTION", "BAR", "OLD MAN", "GOOD SOUP", "&#x2060", "&#x2060", "&#x2060", "&#x2060"]
 ]
-var names = ["CAT", "BIRD", "HAMSTER", "LIZARD", "SNAKE", "DOG"]
+var names = ["CAT", "BIRD", "RAT", "LIZARD", "SNAKE", "DOG"]
 var avatarLocations = [0,0,0,0,0,0]
 var level = 0
 var locationId = [0,0]
@@ -101,7 +104,7 @@ function navigate(choice) {
 function changeLevel(destination, choice) {
     locationId[0] = choice
     for(let i = 1; i <= 9; i++) {
-        document.getElementById(i).innerHTML = locations[choice][i]
+        document.getElementById(i).innerHTML = locations[choice-1][i-1]
     }
     level = destination
 }
