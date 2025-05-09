@@ -79,7 +79,7 @@ function start() {
     selectedAvatar = document.querySelector('#avatarSelector').selectedIndex - 1
     if (selectedAvatar != -1 && avatarLocations[selectedAvatar] == 0) {
         selected = true
-        getElmt("avatar") = names[selectedAvatar]
+        getElmtHTML("avatar") = names[selectedAvatar]
         getElmt("phase2").style.display = "none"
         getElmt("phase3").style.display = "block"
     }
@@ -226,6 +226,10 @@ function locationString() {
 }
 
 function getElmt(id) {
+    return document.getElementById(id)
+}
+
+function getElmtHTML(id) {
     return document.getElementById(id).innerHTML
 }
 
