@@ -79,9 +79,9 @@ function start() {
     selectedAvatar = document.querySelector('#avatarSelector').selectedIndex - 1
     if (selectedAvatar != -1 && avatarLocations[selectedAvatar] == 0) {
         selected = true
-        setElmt("avatar",names[selectedAvatar])
-        document.getElementById("phase2").style.display = "none"
-        document.getElementById("phase3").style.display = "block"
+        getElmt("avatar") = names[selectedAvatar]
+        getElmt("phase2").style.display = "none"
+        getElmt("phase3").style.display = "block"
     }
 }
 
@@ -225,8 +225,8 @@ function locationString() {
     return locationId[0].toString() + locationId[1].toString()
 }
 
-function setElmt(id, content) {
-    document.getElementById(id).innerHTML = content
+function getElmt(id) {
+    return document.getElementById(id).innerHTML
 }
 
 </script>
