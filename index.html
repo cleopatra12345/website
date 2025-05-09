@@ -104,7 +104,7 @@ function navigate(choice) {
 function changeLevel(destination, choice) {
     locationId[0] = choice
     for(let i = 0; i < 9; i++) {
-        document.getElementById(i+1).innerHTML = locations[choice][i]
+        document.getElementById(i+1).innerHTML = locations[choice-1][i]
     }
     level = destination
 }
@@ -188,7 +188,7 @@ function onLoad(data) {
     for(let i = 0; i < avatarLocations.length; i++) {
         avatarLocations[i] = data.data[i].Users
         if(avatarLocations[i] == 0) {
-            document.getElementById(i).innerHTML = names[i]
+            document.getElementById(names[i]).innerHTML = names[i]
         } else {
             document.getElementById(names[i]).innerHTML = "HIDDEN"
         }
