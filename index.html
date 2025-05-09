@@ -225,12 +225,12 @@ function locationString() {
     return locationId[0].toString() + locationId[1].toString()
 }
 
-function getElmtDisplay(id) {
-    return document.getElementById(id).style.display
+function getElmtDisplay(id, content) {
+    document.getElementById(id).style.display = content
 }
 
-function getElmtHTML(id) {
-    return document.getElementById(id).innerHTML
+function getElmtHTML(id, content) {
+    document.getElementById(id).innerHTML = content
 }
 
 </script>
