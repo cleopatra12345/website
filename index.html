@@ -1,13 +1,9 @@
 <!DOCTYPE html>
 <html>
 <body onload="read('onLoad')">
-<div id="phase1" class="panel">
-    <button>HIDE & SEEK</button>
-    <button onclick="newAvatar()">HIDE ANIMAL</button>
-    <button onclick="login()">FIND ANIMAL</button>
-</div>
-<div id="phase2" class="panel">
-    <button onclick="location.reload()">BACK</button>
+<div class="panel">
+    <button id="home" onclick="back()">BACK</button>
+    <button id="actionButton" onclick="action()">&#x2060</button>
     <select id="avatarSelector">
         <option id="selectLabel">CHOOSE</option>
         <option id="CAT" value="CAT">LOADING</option>
@@ -17,13 +13,6 @@
         <option id="SNAKE" value="SNAKE">LOADING</option>
         <option id="DOG" value="DOG">LOADING</option>
     </select>
-    <button onclick="start()">START</button>
-</div>
-<div id="phase3">
-<div class="panel">
-    <button id="home" onclick="back()">BACK</button>
-    <button id="actionButton" onclick="action()">&#x2060</button>
-    <button id="avatar">&#x2060</button>
 </div>
 <div class="panel">
     <button style="background: url(1.png)" id="1" onclick="navigate('1')">TOWN</button>
@@ -45,8 +34,11 @@
 <script>
 
 //randomize board
-//can hide when tile occupied 
+//can hide when tile occupied
 //hide option when already hidden
+//base
+//spot: occupied:Y/N
+//selectedAvatar = document.querySelector('#avatarSelector').selectedIndex - 1
 
 var url = "https://script.google.com/macros/s/AKfycbz62Jx0ltf7VPmCfnvHHwyyAABqcVJnTVcNqO6Wv68b7mMGQ7_NJTF4P6MPZIbjkMJrWQ/exec"
 var locationsHome = ["TOWN", "MOUNTAIN", "SEA", "DESERT", "FOREST", "SWAMP", "MARKET", "FARM", "INN"]
@@ -73,21 +65,6 @@ var hiding = null
 function newAvatar() {
     getElmtDisplay("phase1", "none")
     getElmtDisplay("phase2", "block")
-}
-
-function start() {
-    selectedAvatar = document.querySelector('#avatarSelector').selectedIndex - 1
-    if (selectedAvatar != -1 && avatarLocations[selectedAvatar] == 0) {
-        selected = true
-        getElmtHTML("avatar", names[selectedAvatar])
-        getElmtDisplay("phase2", "none")
-        getElmtDisplay("phase3", "block")
-    }
-}
-
-function login() {
-    getElmtDisplay("phase1", "none")
-    getElmtDisplay("phase3", "block")
 }
 
 function navigate(choice) {
@@ -127,12 +104,12 @@ function checkSpot(choice) {
     } else {
         document.getElementById(choice).innerHTML = names[hiding] + " FOUND!!"
         if(selectedAvatar == null) {
-            document.getElementById("actionButton").innerHTML = "SELECT ANIMAL"
+            getElmtHTML("actionButton", "SELECT ANIMAL")
         }
     }
     if(selected) {
         canHide = true
-        document.getElementById("actionButton").innerHTML = "HIDE"
+        getElmtHTML("actionButton", "HIDE")
     }
     level = 2
 }
@@ -141,30 +118,30 @@ function action() {
     if(canHide) {
         if(level == 2) {
             write(locationString(), selectedAvatar, "hide")
-            document.getElementById("actionButton").innerHTML = "HIDING"
+            getElmtHTML("actionButton", "HIDING")
         }
     } else if(selectedAvatar == null) {
         write(0, hiding, "find")
         selected = true
         selectedAvatar = hiding
-        document.getElementById("actionButton").innerHTML = "SELECTING"
+        getElmtHTML("actionButton", "SELECTING")
         avatarLocations[selectedAvatar] = 0
     }
 }
 
 function hidden() {
-    document.getElementById("actionButton").innerHTML = "&#x2060"
-    document.getElementById("avatar").innerHTML = "&#x2060"
-    document.getElementById(locationId[1]).innerHTML = names[selectedAvatar]
+    getElmtHTML("actionButton", "&#x2060")
+    getElmtHTML("avatar", "&#x2060")
+    getElmtHTML(locationId[1], names[selectedAvatar])
     avatarLocations[selectedAvatar] = 0
     selectedAvatar = null
     selected = false
 }
 
 function found() {
-    document.getElementById("actionButton").innerHTML= "&#x2060"
-    document.getElementById("avatar").innerHTML = names[selectedAvatar]
-    document.getElementById(locationId[1]).innerHTML = "NOTHING HERE"
+    getElmtHTML("actionButton", "&#x2060")
+    getElmtHTML("avatar", names[selectedAvatar])
+    getElmtHTML(locationId[1], "NOTHING HERE")
 }
 
 function back() {
@@ -173,15 +150,15 @@ function back() {
     }
     if(level == 1) {
         for(let i = 1; i <= 9; i++) {
-            document.getElementById(i).innerHTML = locationsHome[i-1]
+            getElmtHTML(i, locationsHome[i-1])
             level = 0
-            document.getElementById(i).style.background = "url(" + (i) + ".png)"
+            getElmtHTML(i, "url(" + (i) + ".png)")
         }
     }
     if(level == 2) {
         changeLevel(1, locationId[0])
         hiding = null
-        document.getElementById("actionButton").innerHTML = "&#x2060"
+        getElmtHTML("actionButton", "&#x2060")
     }
 }
 
@@ -189,9 +166,9 @@ function onLoad(data) {
     for(let i = 0; i < avatarLocations.length; i++) {
         avatarLocations[i] = data.data[i].Users
         if(avatarLocations[i] == 0) {
-            document.getElementById(names[i]).innerHTML = names[i]
+            getElmtHTML(names[i], names[i])
         } else {
-            document.getElementById(names[i]).innerHTML = "HIDDEN"
+            getElmtHTML(names[i], "HIDDEN")
         }
     }
 }
