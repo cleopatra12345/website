@@ -90,7 +90,7 @@ class Spot {
 
     checkSpot(choice) {
         locationId[1] = choice
-        for(let i = 1; i <= 9; i++) {
+        for(let i = 0; i < 9; i++) {
             setElmtHTML(i, "\u2060")
         }
         this.isEmpty = true
@@ -135,7 +135,7 @@ function action() {
 }
 
 function isSelectedThere() {
-    selectedAvatar = getSelected
+    selectedAvatar = getSelected()
     if(selectedAvatar == (-1) || avatarLocations[selectedAvatar] == 0) {
         return false
     }
@@ -162,8 +162,8 @@ function back() {
         location.reload()
     }
     if(levels.level == 1) {
-        for(let i = 1; i <= 9; i++) {
-            setElmtHTML(i, locationsHome[i-1])
+        for(let i = 0; i < 9; i++) {
+            setElmtHTML(i, locationsHome[i])
             levels.level = 0
             setElmtBackground(i, "url(" + i + ".png)")
         }
@@ -177,7 +177,8 @@ function back() {
 
 function onLoad(data) {
     for(let i = 0; i < avatarLocations.length; i++) {
-        avatarLocations[i] = data.data[i].Users
+        console.log(data.data[i+1].Users)
+        avatarLocations[i] = data.data[i+1].Users
         if(avatarLocations[i] == 0) {
             setElmtHTML(names[i], names[i])
         } else {
