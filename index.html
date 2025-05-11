@@ -38,12 +38,11 @@
 //hide option when already hidden
 //base
 //spot: occupied:Y/N
-//selectedAvatar = document.querySelector('#avatarSelector').selectedIndex - 1
 
 var url = "https://script.google.com/macros/s/AKfycbz62Jx0ltf7VPmCfnvHHwyyAABqcVJnTVcNqO6Wv68b7mMGQ7_NJTF4P6MPZIbjkMJrWQ/exec"
 var locationsHome = ["TOWN", "MOUNTAIN", "SEA", "DESERT", "FOREST", "SWAMP", "MARKET", "FARM", "INN"]
 var locations = [
-    ["HOUSE", "STREET", "LIGHT", "LYBRARY", "&#x2060", "&#x2060", "&#x2060", "&#x2060", "&#x2060"],
+    ["HOUSE", "STREET", "LIGHT", "LIBRARY", "&#x2060", "&#x2060", "&#x2060", "&#x2060", "&#x2060"],
     ["SUMMIT", "CAVE", "WATERFALL", "RAVINE", "MINE", "BRIDGE", "&#x2060", "&#x2060", "&#x2060"],
     ["BOAT", "DOCK", "BEACH", "COVE", "SURF SHACK", "CORAL REEF", "&#x2060", "&#x2060", "&#x2060"],
     ["CACTUS", "DUNE", "TOMB", "CANYON", "OASIS", "TUMBLE WEED", "&#x2060", "&#x2060", "&#x2060"],
@@ -55,110 +54,106 @@ var locations = [
 ]
 var names = ["CAT", "BIRD", "RAT", "LIZARD", "SNAKE", "DOG"]
 var avatarLocations = [0,0,0,0,0,0]
-var level = 0
 var locationId = [0,0]
-var canHide = false
-var selected = false
-var selectedAvatar = null
-var hiding = null
 
-function newAvatar() {
-    getElmtDisplay("phase1", "none")
-    getElmtDisplay("phase2", "block")
-}
+class Levels {
+    level = 0
+    nextLevel(choice) {
+        if(this.level == 0) {
+            this.changeLevel(1, choice)
+            this.setBackground()
+        } else if(this.level == 1) {
+            checkSpot(choice)
+        }
+    }
+
+    changeLevel(destination, choice) {
+        locationId[0] = choice
+        for(let i = 0; i < 9; i++) {
+            setElmtHTML(i+1, locations[choice-1][i])
+        }
+        this.level = destination
+    }
+
+    setBackground() {
+        for(let i = 1; i <= 9; i++) {
+            setElmtBackground(i, "url(placeHolder.png)")
+        }
+    }
+} var levels = new Levels(0)
 
 function navigate(choice) {
-    if(level == 0) {
-        changeLevel(1, choice)
-        for(let i = 1; i <= 9; i++) {
-            document.getElementById(i).style.background = "url(placeHolder.png)"
-        }
-    } else if(level == 1) {
-        checkSpot(choice)
-    }
-}
-
-function changeLevel(destination, choice) {
-    locationId[0] = choice
-    for(let i = 0; i < 9; i++) {
-        getElmtHTML(i+1, locations[choice-1][i])
-    }
-    level = destination
+    levels.nextLevel(choice)
 }
 
 function checkSpot(choice) {
     locationId[1] = choice
     for(let i = 1; i <= 9; i++) {
-        getElmtHTML(i, "\u2060")
+        setElmtHTML(i, "\u2060")
     }
     var isEmpty = true
     for(let i = 0; i < avatarLocations.length; i++) {
         if(avatarLocations[i].toString() == locationString()) {
-            getElmtHTML(names[i], names[i])
+            setElmtHTML(names[i], names[i])
             isEmpty = false
             hiding = i
         }
     }
     if(isEmpty) {
-        getElmtHTML(choice, "NOTHING HERE")
-    } else {
-        document.getElementById(choice).innerHTML = names[hiding] + " FOUND!!"
-        if(selectedAvatar == null) {
-            getElmtHTML("actionButton", "SELECT ANIMAL")
+        setElmtHTML(choice, "NOTHING HERE")
+        if(isSelectedThere()) {
+            setElmtHTML("actionButton", "HIDE")
         }
+    } else {
+        setElmtHTML(choice, names[hiding] + " FOUND!!")
+        setElmtHTML("actionButton", "TAKE")
     }
-    if(selected) {
-        canHide = true
-        getElmtHTML("actionButton", "HIDE")
-    }
-    level = 2
+    levels.level = 2
 }
 
 function action() {
-    if(canHide) {
+    if(isSelectedThere()) {
         if(level == 2) {
             write(locationString(), selectedAvatar, "hide")
-            getElmtHTML("actionButton", "HIDING")
+            setElmtHTML("actionButton", "HIDING")
         }
-    } else if(selectedAvatar == null) {
-        write(0, hiding, "find")
-        selected = true
-        selectedAvatar = hiding
-        getElmtHTML("actionButton", "SELECTING")
-        avatarLocations[selectedAvatar] = 0
     }
+}
+
+function isSelectedThere() {
+    selectedAvatar = document.querySelector('#avatarSelector').selectedIndex - 1
+    if(selectedAvatar == (-1) || avatarLocations[selectedAvatar] == 0) {
+        return false
+    }
+    return true
 }
 
 function hidden() {
-    getElmtHTML("actionButton", "&#x2060")
-    getElmtHTML("avatar", "&#x2060")
-    getElmtHTML(locationId[1], names[selectedAvatar])
+    setElmtHTML("actionButton", "&#x2060")
+    setElmtHTML(locationId[1], names[selectedAvatar])
     avatarLocations[selectedAvatar] = 0
-    selectedAvatar = null
-    selected = false
 }
 
 function found() {
-    getElmtHTML("actionButton", "&#x2060")
-    getElmtHTML("avatar", names[selectedAvatar])
-    getElmtHTML(locationId[1], "NOTHING HERE")
+    setElmtHTML("actionButton", "&#x2060")
+    setElmtHTML(locationId[1], "NOTHING HERE")
 }
 
 function back() {
-    if(level == 0) {
+    if(levels.level == 0) {
         location.reload()
     }
-    if(level == 1) {
+    if(levels.level == 1) {
         for(let i = 1; i <= 9; i++) {
-            getElmtHTML(i, locationsHome[i-1])
-            level = 0
-            getElmtHTML(i, "url(" + (i) + ".png)")
+            setElmtHTML(i, locationsHome[i-1])
+            levels.level = 0
+            setElmtBackground(i, "url(" + i + ".png)")
         }
     }
-    if(level == 2) {
-        changeLevel(1, locationId[0])
+    if(levels.level == 2) {
+        levels.changeLevel(1, locationId[0])
         hiding = null
-        getElmtHTML("actionButton", "&#x2060")
+        setElmtHTML("actionButton", "&#x2060")
     }
 }
 
@@ -166,9 +161,9 @@ function onLoad(data) {
     for(let i = 0; i < avatarLocations.length; i++) {
         avatarLocations[i] = data.data[i].Users
         if(avatarLocations[i] == 0) {
-            getElmtHTML(names[i], names[i])
+            setElmtHTML(names[i], names[i])
         } else {
-            getElmtHTML(names[i], "HIDDEN")
+            setElmtHTML(names[i], "HIDDEN")
         }
     }
 }
@@ -202,12 +197,16 @@ function locationString() {
     return locationId[0].toString() + locationId[1].toString()
 }
 
-function getElmtDisplay(id, content) {
+function setElmtDisplay(id, content) {
     document.getElementById(id).style.display = content
 }
 
-function getElmtHTML(id, content) {
+function setElmtHTML(id, content) {
     document.getElementById(id).innerHTML = content
+}
+
+function setElmtBackground(id, content) {
+    document.getElementById(id).style.background = content
 }
 
 </script>
@@ -227,8 +226,5 @@ function getElmtHTML(id, content) {
         width: 960px;
         font-size: 0px;
         margin: auto;
-    }
-    #phase2, #phase3 {
-        display: none;
     }
 </style>
