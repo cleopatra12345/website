@@ -15,19 +15,19 @@
     </select>
 </div>
 <div class="panel">
-    <button style="background: url(1.png)" id="1" onclick="navigate('1')">TOWN</button>
-    <button style="background: url(2.png)" id="2" onclick="navigate('2')">MOUNTAIN</button>
-    <button style="background: url(3.png)" id="3" onclick="navigate('3')">SEA</button>
+    <button style="background: url(0.png)" id="0" onclick="navigate('0')">TOWN</button>
+    <button style="background: url(1.png)" id="1" onclick="navigate('1')">MOUNTAIN</button>
+    <button style="background: url(2.png)" id="2" onclick="navigate('2')">SEA</button>
 </div>
 <div class="panel">
-    <button style="background: url(placeHolder.png)" id="4" onclick="navigate('4')">DESERT</button>
-    <button style="background: url(placeHolder.png)" id="5" onclick="navigate('5')">FOREST</button>
-    <button style="background: url(placeHolder.png)" id="6" onclick="navigate('6')">SWAMP</button>
+    <button style="background: url(placeHolder.png)" id="3" onclick="navigate('3')">DESERT</button>
+    <button style="background: url(placeHolder.png)" id="4" onclick="navigate('4')">FOREST</button>
+    <button style="background: url(placeHolder.png)" id="5" onclick="navigate('5')">SWAMP</button>
 </div>
 <div class="panel">
-    <button style="background: url(placeHolder.png)" id="7" onclick="navigate('7')">MARKET</button>
-    <button style="background: url(placeHolder.png)" id="8" onclick="navigate('8')">FARM</button>
-    <button style="background: url(placeHolder.png)" id="9" onclick="navigate('9')">INN</button>
+    <button style="background: url(placeHolder.png)" id="6" onclick="navigate('6')">MARKET</button>
+    <button style="background: url(placeHolder.png)" id="7" onclick="navigate('7')">FARM</button>
+    <button style="background: url(placeHolder.png)" id="8" onclick="navigate('8')">INN</button>
 </div>
 </body>
 </html>
@@ -63,69 +63,87 @@ class Levels {
             this.changeLevel(1, choice)
             this.setBackground()
         } else if(this.level == 1) {
-            checkSpot(choice)
+            spot.checkSpot(choice)
         }
     }
 
     changeLevel(destination, choice) {
         locationId[0] = choice
         for(let i = 0; i < 9; i++) {
-            setElmtHTML(i+1, locations[choice-1][i])
+            setElmtHTML(i, locations[choice][i])
         }
         this.level = destination
     }
 
     setBackground() {
-        for(let i = 1; i <= 9; i++) {
+        for(let i = 0; i < 9; i++) {
             setElmtBackground(i, "url(placeHolder.png)")
         }
     }
 } var levels = new Levels(0)
 
+class Spot {
+    constructor() {
+        this.avatar = 0
+        this.isEmpty = true
+    }
+
+    checkSpot(choice) {
+        locationId[1] = choice
+        for(let i = 1; i <= 9; i++) {
+            setElmtHTML(i, "\u2060")
+        }
+        this.isEmpty = true
+        for(let i = 0; i < avatarLocations.length; i++) {
+            if(avatarLocations[i].toString() == locationString()) {
+                setElmtHTML(names[i], names[i])
+                this.isEmpty = false
+                this.hiding = i
+            }
+        }
+        if(this.isEmpty) {
+            setElmtHTML(choice, "NOTHING HERE")
+            if(isSelectedThere()) {
+                setElmtHTML("actionButton", "HIDE")
+            }
+        } else {
+            setElmtHTML(choice, names[this.hiding] + " FOUND!!")
+            setElmtHTML("actionButton", "TAKE")
+        }
+        levels.level = 2
+    }
+
+    action() {
+        if(!this.isEmpty) {
+            write(0, this.hiding, "take")
+            setElmtHTML("actionButton", "TAKING")
+        }else if(isSelectedThere()) {
+            write(locationString(), getSelected(), "hide")
+            setElmtHTML("actionButton", "HIDING")
+        }
+    }
+} var spot = new Spot()
+
 function navigate(choice) {
     levels.nextLevel(choice)
 }
 
-function checkSpot(choice) {
-    locationId[1] = choice
-    for(let i = 1; i <= 9; i++) {
-        setElmtHTML(i, "\u2060")
-    }
-    var isEmpty = true
-    for(let i = 0; i < avatarLocations.length; i++) {
-        if(avatarLocations[i].toString() == locationString()) {
-            setElmtHTML(names[i], names[i])
-            isEmpty = false
-            hiding = i
-        }
-    }
-    if(isEmpty) {
-        setElmtHTML(choice, "NOTHING HERE")
-        if(isSelectedThere()) {
-            setElmtHTML("actionButton", "HIDE")
-        }
-    } else {
-        setElmtHTML(choice, names[hiding] + " FOUND!!")
-        setElmtHTML("actionButton", "TAKE")
-    }
-    levels.level = 2
-}
-
 function action() {
-    if(isSelectedThere()) {
-        if(level == 2) {
-            write(locationString(), selectedAvatar, "hide")
-            setElmtHTML("actionButton", "HIDING")
-        }
+    if(levels.level == 2) {
+        spot.action()
     }
 }
 
 function isSelectedThere() {
-    selectedAvatar = document.querySelector('#avatarSelector').selectedIndex - 1
+    selectedAvatar = getSelected
     if(selectedAvatar == (-1) || avatarLocations[selectedAvatar] == 0) {
         return false
     }
     return true
+}
+
+function getSelected() {
+    return document.querySelector('#avatarSelector').selectedIndex - 1
 }
 
 function hidden() {
@@ -187,7 +205,7 @@ function readManager(data, id) {
         case "hide":
             hidden()
             break
-        case "find":
+        case "take":
             found()
             break
     }
@@ -215,7 +233,7 @@ function setElmtBackground(id, content) {
         height: 320px;
         width: 320px;
         border: none;
-        background: url(0.png);
+        background: url(buttons.png);
         font-family: Arial, Helvetica, sans-serif;
         font-weight: bold;
         font-size: 32px;
