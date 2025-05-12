@@ -97,9 +97,10 @@ class Spot {
         this.isEmpty = true
         for(let i = 0; i < avatarLocations.length; i++) {
             if(avatarLocations[i].toString() == locationString()) {
-                setElmtHTML(names[i], names[i])
                 this.isEmpty = false
                 this.hiding = i
+                setElmtHTML(choice, names[this.hiding] + " FOUND!!")
+                setElmtHTML("actionButton", "TAKE")
             }
         }
         if(this.isEmpty) {
@@ -107,9 +108,6 @@ class Spot {
             if(isSelectedThere()) {
                 setElmtHTML("actionButton", "HIDE")
             }
-        } else {
-            setElmtHTML(choice, names[this.hiding] + " FOUND!!")
-            setElmtHTML("actionButton", "TAKE")
         }
         levels.level = 2
     }
