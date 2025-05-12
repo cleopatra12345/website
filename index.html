@@ -177,9 +177,8 @@ function back() {
 }
 
 function onLoad(data) {
-    setElmtHTML("home", data.data[1].Users)
     for(let i = 0; i < avatarLocations.length; i++) {
-        avatarLocations[i] = data.data[i+1].Users
+        avatarLocations[i] = data.data[i].Users
         if(avatarLocations[i] == 0) {
             setElmtHTML(names[i], names[i])
         } else {
