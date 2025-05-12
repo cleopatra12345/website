@@ -137,10 +137,10 @@ function action() {
 
 function isSelectedThere() {
     selectedAvatar = getSelected()
-    setElmtHTML("home", avatarLocations[selectedAvatar])
     if(selectedAvatar == (-1) || avatarLocations[selectedAvatar] == 0) {
         return false
     }
+    setElmtHTML("home", "test")
     return true
 }
 
