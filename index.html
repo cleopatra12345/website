@@ -175,7 +175,7 @@ function back() {
 }
 
 function onLoad(data) {
-setElmtHTML("home",data.data[i].Users.toString())
+setElmtHTML("home",data.data[0].Users.toString())
     for(let i = 0; i < avatarLocations.length; i++) {
         var dataString = data.data[i].Users.toString()
         avatarLocations[i][0] = dataString.charAt(0)
