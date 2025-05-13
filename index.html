@@ -182,7 +182,7 @@ setElmtHTML("home",data.data[0].Users.toString())
         avatarLocations[i][0]++
         avatarLocations[i][1] = dataString.charAt(1)
         avatarLocations[i][1]++
-        if(avatarLocations[i] == 0) {
+        if(avatarLocations[i][0] == 0 && avatarLocations[i][1] == 0) {
             setElmtHTML(names[i], names[i])
         } else {
             setElmtHTML(names[i], "HIDDEN")
