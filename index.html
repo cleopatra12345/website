@@ -176,7 +176,9 @@ function back() {
 
 function onLoad(data) {
     for(let i = 0; i < avatarLocations.length; i++) {
-        avatarLocations[i] = data.data[i].Users
+        var dataString = data.data[i].Users.toString()
+        avatarLocations[i][0] = dataString.charAt(0)
+        avatarLocations[i][1] = dataString.charAt(1)
         if(avatarLocations[i] == 0) {
             setElmtHTML(names[i], names[i])
         } else {
