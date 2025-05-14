@@ -135,7 +135,7 @@ function action() {
 
 function isSelectedThere() {
     selectedAvatar = getSelected()
-    if(selectedAvatar == (-1) || avatarLocations[selectedAvatar] != 0) {
+    if(selectedAvatar == (-1) || avatarLocations[selectedAvatar][0] != null) {
         return false
     }
     return true
