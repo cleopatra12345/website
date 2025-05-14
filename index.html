@@ -90,6 +90,7 @@ class Spot {
     }
 
     checkSpot(choice) {
+        setElmtHTML("actionButton", avatarLocationString(0))
         locationId[1] = choice
         for(let i = 0; i < 9; i++) {
             setElmtHTML(i, "\u2060")
