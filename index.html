@@ -96,7 +96,7 @@ class Spot {
         }
         this.isEmpty = true
         for(let i = 0; i < avatarLocations.length; i++) {
-            if(avatarLocations[i].toString() == locationString()) {
+            if(avatarLocationString(i) == locationString()) {
                 this.isEmpty = false
                 this.hiding = i
                 setElmtHTML(choice, names[this.hiding] + " FOUND!!")
@@ -179,9 +179,9 @@ function onLoad(data) {
         var dataString = data.data[i].Users.toString()
         if(dataString.length > 1) {
             avatarLocations[i][0] = dataString.charAt(0)
-            avatarLocations[i][0]++
+            avatarLocations[i][0]--
             avatarLocations[i][1] = dataString.charAt(1)
-            avatarLocations[i][1]++
+            avatarLocations[i][1]--
             setElmtHTML(names[i], "HIDDEN")
         } else {
             setElmtHTML(names[i], names[i])
@@ -216,6 +216,10 @@ function readManager(data, id) {
 
 function locationString() {
     return locationId[0].toString() + locationId[1].toString()
+}
+
+function avatarLocationString(index) {
+    return avatarLocations[i][0].toString() + avatarLocations[i][1].toString()
 }
 
 function setElmtDisplay(id, content) {
