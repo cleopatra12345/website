@@ -34,6 +34,7 @@
 <script>
 
 //randomize board
+//animal names and places to csv file
 
 var url = "https://script.google.com/macros/s/AKfycbz62Jx0ltf7VPmCfnvHHwyyAABqcVJnTVcNqO6Wv68b7mMGQ7_NJTF4P6MPZIbjkMJrWQ/exec"
 var locationsHome = ["TOWN", "MOUNTAIN", "SEA", "DESERT", "FOREST", "SWAMP", "MARKET", "FARM", "INN"]
@@ -95,7 +96,7 @@ class Spot {
                 this.isEmpty = false
                 this.hiding = i
                 setElmtHTML(choice, names[this.hiding] + " FOUND!!")
-                setElmtHTML("actionButton", "TAKE")
+                setElmtHTML("actionButton", "SAVE")
             }
         }
         if(this.isEmpty) {
@@ -112,7 +113,7 @@ class Spot {
     action() {
         if(!this.isEmpty) {
             write(0, this.hiding, "take")
-            setElmtHTML("actionButton", "TAKING")
+            setElmtHTML("actionButton", "SAVING")
         }else if(isSelectedThere()) {
             write(locationStringPlusOne(), getSelected(), "hide")
             setElmtHTML("actionButton", "HIDING")
@@ -208,7 +209,7 @@ function readManager(data, id) {
             response("ANIMAL HIDDEN")
             break
         case "take":
-            response("ANIMAL FOUND")
+            response("ANIMAL SAVED")
             break
     }
 }
