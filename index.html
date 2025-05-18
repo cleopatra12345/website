@@ -150,8 +150,12 @@ function getSelected() {
 }
 
 function response(message) {
-    setElmtHTML("actionButton", "&#x2060")
-    if(confirm(message)) {
+    if(levels.level == 2) {
+        setElmtHTML("actionButton", "&#x2060")
+        if(confirm(message)) {
+            location.reload()
+        }
+    } else {
         location.reload()
     }
 }
