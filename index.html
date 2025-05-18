@@ -117,7 +117,7 @@ class Spot {
             write(0, this.hiding, "take")
             setElmtHTML("actionButton", "TAKING")
         }else if(isSelectedThere()) {
-            write(locationString(), getSelected(), "hide")
+            write(locationStringPlusOne(), getSelected(), "hide")
             setElmtHTML("actionButton", "HIDING")
         }
     }
@@ -146,14 +146,15 @@ function getSelected() {
 }
 
 function hidden() {
-    setElmtHTML("actionButton", "&#x2060")
-    setElmtHTML(locationId[1], names[selectedAvatar])
-    avatarLocations[selectedAvatar] = 0
+    if(confirm("ANIMAL HIDDEN")) {
+        location.found()
+    }
 }
 
 function found() {
-    setElmtHTML("actionButton", "&#x2060")
-    setElmtHTML(locationId[1], "NOTHING HERE")
+    if(confirm("ANIMAL FOUND")) {
+        location.reload()
+    }
 }
 
 function back() {
@@ -218,8 +219,19 @@ function locationString() {
     return locationId[0].toString() + locationId[1].toString()
 }
 
+function locationStringPlusOne() {
+    var location0 = locationId[0]
+    var location1 = locationId[1]
+    location0++
+    location1++
+    return location0.toString() + location1.toString()
+}
+
 function avatarLocationString(i) {
-    return avatarLocations[i][0].toString() + avatarLocations[i][1].toString()
+    if(avatarLocations[i][0] != null) {
+        return avatarLocations[i][0].toString() + avatarLocations[i][1].toString()
+    }
+    return "0"
 }
 
 function setElmtDisplay(id, content) {
