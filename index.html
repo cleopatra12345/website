@@ -4,7 +4,7 @@
 <div class="panel">
     <button id="home" onclick="back()">BACK</button>
     <button id="actionButton" onclick="action()">&#x2060</button>
-    <select id="avatarSelector">
+    <select id="avatarSelector" onchange="animalSelectChange()">
         <option id="selectLabel">CHOOSE</option>
         <option id="CAT" value="CAT">LOADING</option>
         <option id="BIRD" value="BIRD">LOADING</option>
@@ -34,11 +34,6 @@
 <script>
 
 //randomize board
-//can hide when tile occupied
-//update action button when option selected
-//hide option when already hidden
-//base
-//spot: occupied:Y/N
 
 var url = "https://script.google.com/macros/s/AKfycbz62Jx0ltf7VPmCfnvHHwyyAABqcVJnTVcNqO6Wv68b7mMGQ7_NJTF4P6MPZIbjkMJrWQ/exec"
 var locationsHome = ["TOWN", "MOUNTAIN", "SEA", "DESERT", "FOREST", "SWAMP", "MARKET", "FARM", "INN"]
@@ -107,6 +102,8 @@ class Spot {
             setElmtHTML(choice, "NOTHING HERE")
             if(isSelectedThere()) {
                 setElmtHTML("actionButton", "HIDE")
+            } else {
+                setElmtHTML("actionButton", "&#x2060")
             }
         }
         levels.level = 2
@@ -133,6 +130,12 @@ function action() {
     }
 }
 
+function animalSelectChange() {
+    if(levels.level == 2) {
+        spot.checkSpot(locationId[locationId.length-1])
+    }
+}
+
 function isSelectedThere() {
     selectedAvatar = getSelected()
     if(selectedAvatar == (-1) || avatarLocations[selectedAvatar][0] != null) {
@@ -145,14 +148,9 @@ function getSelected() {
     return document.querySelector('#avatarSelector').selectedIndex - 1
 }
 
-function hidden() {
-    if(confirm("ANIMAL HIDDEN")) {
-        location.found()
-    }
-}
-
-function found() {
-    if(confirm("ANIMAL FOUND")) {
+function response(message) {
+    setElmtHTML("actionButton", "&#x2060")
+    if(confirm(message)) {
         location.reload()
     }
 }
@@ -207,10 +205,10 @@ function readManager(data, id) {
             onLoad(data)
             break
         case "hide":
-            hidden()
+            response("ANIMAL HIDDEN")
             break
         case "take":
-            found()
+            response("ANIMAL FOUND")
             break
     }
 }
