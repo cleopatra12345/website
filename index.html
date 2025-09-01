@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Welcome</title>
     </head>
     <body>
-        <h1>Welcome to my Page!</h1>
-        <img src="smile.png">
+        <h1 id="myHeader">Welcome to my Page!</h1>
+        <img id="myImage" src="smile.png">
+        <a href="https://www.patreon.com/WindySqueaks">
+            <img id="patreonImage" src="patreon.png">
+        </a>
     </body>
 </html>
 
@@ -16,15 +21,26 @@
         background-attachment: fixed;
         background-size: 100% 100%;
     }
-    h1 {
-        text-align:center;
-        margin: 100px;
+    body, html {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
-    img {
+    #myHeader {
+        text-align:center;
+        margin: 50px;
+    }
+    #myImage {
         width: 100px;
         height: 100px;
-        display: block;
-        margin: auto;
+        margin: 150px;
     }
-
+    #patreonImage {
+        width: 30px;
+        height: 30px;
+        filter: grayscale(100%);
+    }
 </style>
